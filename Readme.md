@@ -1,3 +1,20 @@
+```
+|#######====================#######|
+|#(1)*UNITED STATES OF AMERICA*(1)#|
+|#**          /===\   ********  **#|
+|*# {G}      | (") |             #*|
+|#*  ******  | /v\ |    O N E    *#|
+|#(1)         \===/            (1)#|
+|##=========ONE DOLLAR===========##|
+------------------------------------
+
+```
+
+
+
+
+
+
 ## 1. References to at least two scientific papers that are related to your topic
 
 
