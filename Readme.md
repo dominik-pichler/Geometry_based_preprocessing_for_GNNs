@@ -79,7 +79,33 @@ and includes the following columns:
 A more in-depth dataset analysis can be found [here]((https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
 # 3. Project plan:
-## 3.1 Tasks with Time estimates.
+## 3.1 Dataset Collection and Preprocessing
+- **Research and Identify Suitable Datasets**: 10 hours
+- **Data Cleaning and Preprocessing**: 20 hours
+- **Feature Engineering**: 10 hours
 
+## 3.2 Designing and Building the Graph Neural Network
+- **Literature Review on Graph Neural Networks**: 10 hours
+- **Network Architecture Design**: 15 hours
+- **Implementation of the Network**: 20 hours
+
+## 3.3 Training and Fine-Tuning the Network
+- **Initial Model Training**: 20 hours
+- **Hyperparameter Tuning**: 15 hours
+- **Validation and Testing**: 15 hours
+
+## 3.4 Building an Application to Present Results
+- **Design User Interface**: 10 hours
+- **Develop Application Backend**: 15 hours
+- **Integrate Model with Application**: 10 hours
+
+## 3.5 Writing the Final Report
+- **Drafting the Report Structure**: 5 hours
+- **Writing and Editing Content**: 15 hours
+- **Creating Visualizations and Appendices**: 5 hours
+
+## 3.6 Preparing the Presentation
+- **Design Presentation Slides**: 5 hours
+- **Rehearse Presentation Delivery**: 5 hours
 
 
