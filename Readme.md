@@ -28,7 +28,7 @@
 In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
 
 
-Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 Mrd.€have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928)'.
+Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 Mrd.€have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
 Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach, it might still be useful for VAT Fraud as well.
 
 
@@ -39,10 +39,10 @@ Therefore, I try to **bring my own method** to detect money laundering in the ge
 
 For this purpose, I am using the following dataset:
 -  [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
-)
 
 
-This data looks the following and contains 180 Mio. of those transactions (rows), with a Laundering-Transaction Share of xxxx Percent
+
+This data looks the following and contains 180 Mio. of those transactions (rows), with a high and low Laundering-Transaction Share.
 
 
 
