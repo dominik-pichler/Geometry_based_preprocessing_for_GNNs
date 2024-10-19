@@ -24,34 +24,61 @@
 
 
 
-
-## 1. References to at least two scientific papers that are related to your topic
-
-
-## 2. A decision of a topic of your choice (see below for inspiration)
-
-In this project I am to investigate **Graph Anomaly Detection** in Company Networks with the help of **Graph Neural Networks**.
-Inspired by the big issue of Value-Added-Tax Fraid, not only causing financial losses in the 
-It is assumed that alone in 2021 the EU alone, approx. 15 Mrd. Euros have been stolen by utilizing Value-Added-Tax Fraud-techniques. [*(Ott,2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928)
+# 1. Introdction
+In this project I am investigating **Graph Anomaly Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
+Initally Inspired by the big issue of Value-Added-Tax Fraid, that is not only causing financial losses in the entire European Union as, is assumed that alone in 2021 , approx. 15 Mrd. Euros have been stolen by utilizing Value-Added-Tax Fraud-techniques. [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928), but also creating significant competitive disadvantages for companies that play 'fair'.
+Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. Due to the geometry based approach, it might still be useful for VAT Fraud as well.
 
 
+Therefore, I try to **bring my own method** to detect money laundering in the geometrical structures present in the [IBM Transactions for Anti Money Laundering (AML) while orienting myself on the following three papers:
+[The geometry of suspicious money laundering activities in financial networks](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi)
+[Provably Powerful Graph Neural Networks for Directed Multigraph](https://arxiv.org/pdf/2306.11586)
+[Smurf-based Anti-money Laundering in Time Evolving Transction Networks](https://www.researchgate.net/publication/354487674_Smurf-Based_Anti-money_Laundering_in_Time-Evolving_Transaction_Networks)
+
+while utilizing the following dataset [IBM - Syntetic Transaction Data for Anti-Money-Laundry](Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
+)
 
 
-
-
-
-
-## 3. A decision of which type of project you want to do (see below)
-In this case I'll choose the *Bring Your Own Method*
-
-# 4. A written summary that should contain:
-- Short description of your project idea and the approach you intend to use 
+This data looks the following and contains 180 Mio. of those transactions (rows), with a Laundering-Transaction Share of xxxx Percent
 
 
 
-- Description of the dataset you are about to use (or collect)
+# 2. Dataset
+
+| Timestamp       | From Bank | Account    | To Bank | Account    | Amount Received | Receiving Currency | Amount Paid | Payment Currency | Payment Format | Is Laundering |
+|-----------------|-----------|------------|---------|------------|-----------------|--------------------|-------------|------------------|----------------|---------------|
+| 01.09.22 0:08   | 11        | 8000ECA90  | 11      | 8000ECA90  | 3195403         | US Dollar          | 3195403     | US Dollar        | Reinvestment   | 0             |
+| 01.09.22 0:21   | 3402      | 80021DAD0  | 3402    | 80021DAD0  | 1858.96         | US Dollar          | 1858.96     | US Dollar        | Reinvestment   | 0             |
+| 01.09.22 0:00   | 11        | 8000ECA90  | 1120    | 8006AA910  | 592571          | US Dollar          | 592571      | US Dollar        | Cheque         | 0             |
+| 01.09.22 0:16   | 3814      | 8006AD080  | 3814    | 8006AD080  | 12.32           | US Dollar          | 12.32       | US Dollar        | Reinvestment   | 0             |
+| 01.09.22 0:00   | 20        | 8006AD530  | 20      | 8006AD530  | 2941.56         | US Dollar          | 2941.56     | US Dollar        | Reinvestment   | 0             |
+| 01.09.22 0:24   | 12        | 8006ADD30  | 12      | 8006ADD30  | 6473.62         | US Dollar          | 6473.62     | US Dollar        | Reinvestment   | 0             |
+| 01.09.22 0:17   | 11        | 800059120  | 1217    | 8006AD4E0  | 60562           | US Dollar          | 60562       | US Dollar        | ACH            | 0             |
 
 
 
-- A work-breakdown structure for the individual tasks with time estimates (hours or days) for dataset collection; designing and building an appropriate network; training and fine-tuning that network; building an application to present the results; writing the final report; preparing the presentation of your work.
+and includes the following columns:
+
+
+| Column             | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| Timestamp          | The date and time when the transaction occurred.                            |
+| From Bank          | The identifier of the bank from which the funds were sent.                  |
+| Account            | The account number from which the funds were sent.                          |
+| To Bank            | The identifier of the bank to which the funds were sent.                    |
+| Account            | The account number to which the funds were sent.                            |
+| Amount Received    | The total amount of money received in the transaction.                      |
+| Receiving Currency | The currency in which the amount was received.                              |
+| Amount Paid        | The total amount of money paid in the transaction.                          |
+| Payment Currency   | The currency in which the payment was made.                                 |
+| Payment Format     | The method or format used for the payment (e.g., Reinvestment, Cheque, ACH).|
+| Is Laundering      | Indicates whether the transaction is suspected of money laundering (0 = No).|
+
+
+A more in-depth dataset analysis can be found [here]((https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
+
+# 3. Project plan:
+## 3.1 Tasks with Time estimates.
+
+
 
