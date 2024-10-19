@@ -17,16 +17,18 @@
      |   |   |
      L___l___J
       |_ | _|
-     (___|___)
+     (___|__)
 ```
 
 
 
 
 
-# 1. Introdction
-In this project I am investigating **Graph Anomaly Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
-Initially Inspired by the big issue of Value-Added-Tax Fraud, that is not only causing financial losses in the entire European Union as it is assumed that in 2021 alone , approx. 15 Mrd.€  have been stolen by criminals applying Value-Added-Tax Fraud-techniques according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928)'.
+# 1. Introduction
+In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
+
+
+Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 Mrd.€have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928)'.
 Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach, it might still be useful for VAT Fraud as well.
 
 
@@ -76,7 +78,7 @@ and includes the following columns:
 | Is Laundering      | Indicates whether the transaction is suspected of money laundering (0 = No).|
 
 
-A more in-depth dataset analysis can be found [here]((https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
+A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
 # 3. Project plan:
 ## 3.1 Dataset Collection and Preprocessing
@@ -90,7 +92,7 @@ A more in-depth dataset analysis can be found [here]((https://www.kaggle.com/dat
 - **Implementation of the Network**: 20 hours
 
 ## 3.3 Training and Fine-Tuning the Network
-- **Initial Model Training**: 20 hours
+- **Initial Model Training**: 20 hous
 - **Hyperparameter Tuning**: 15 hours
 - **Validation and Testing**: 15 hours
 
