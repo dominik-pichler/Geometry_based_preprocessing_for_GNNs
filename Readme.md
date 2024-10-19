@@ -26,8 +26,8 @@
 
 # 1. Introdction
 In this project I am investigating **Graph Anomaly Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
-Initally Inspired by the big issue of Value-Added-Tax Fraid, that is not only causing financial losses in the entire European Union as, is assumed that alone in 2021 , approx. 15 Mrd. Euros have been stolen by utilizing Value-Added-Tax Fraud-techniques according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928), but also creating significant competitive disadvantages for companies that play 'fair'.
-Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. Due to the geometry based approach, it might still be useful for VAT Fraud as well.
+Initially Inspired by the big issue of Value-Added-Tax Fraud, that is not only causing financial losses in the entire European Union as it is assumed that in 2021 alone , approx. 15 Mrd.€  have been stolen by criminals applying Value-Added-Tax Fraud-techniques according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928)'.
+Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach, it might still be useful for VAT Fraud as well.
 
 
 Therefore, I try to **bring my own method** to detect money laundering in the geometrical structures present in the IBM Transactions for Anti Money Laundering (AML) while orienting myself on the following three papers:
@@ -35,7 +35,8 @@ Therefore, I try to **bring my own method** to detect money laundering in the ge
 - [Provably Powerful Graph Neural Networks for Directed Multigraph](https://arxiv.org/pdf/2306.11586)
 - [Smurf-based Anti-money Laundering in Time Evolving Transction Networks](https://www.researchgate.net/publication/354487674_Smurf-Based_Anti-money_Laundering_in_Time-Evolving_Transaction_Networks)
 
-while utilizing the following dataset [IBM - Syntetic Transaction Data for Anti-Money-Laundry](Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
+For this purpose, I am using the following dataset:
+-  [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
 )
 
 
