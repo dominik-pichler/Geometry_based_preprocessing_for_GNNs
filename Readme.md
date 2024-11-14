@@ -111,3 +111,5 @@ A more in-depth dataset analysis can be found [here](https://www.kaggle.com/data
 - **Rehearse Presentation Delivery**: 5 hours
 
 
+# Implementation
+The core concept here is a neurosymbolic approach, combining symbolic AI (logics, rules) and graph neural networks. 
