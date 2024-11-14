@@ -4,7 +4,7 @@ import math
 
 
 def load_demo_data():
-    return pd.read_csv('../../data/demo_data.csv', sep=',')
+    return pd.read_csv('../../data/LI-Small_Trans.csv', sep=',')
 
 
 def isNaN(num):
