@@ -1,0 +1,15 @@
+services:
+  main:
+    container_name: main
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+    working_dir: /workspace
+    user: ${UID:-1000}:${GID:-1000}
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    build:
+      context: .
+      dockerfile: Dockerfile
