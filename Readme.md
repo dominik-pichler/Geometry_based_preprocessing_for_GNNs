@@ -21,7 +21,11 @@
 ```
 
 
-
+# Setup
+1. Setup the DB Infrastructure via `docker-compose up -d`.
+2. Install all needed packages via `poetry install`.
+3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` dir.
+4. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
 
 
 # 1. Introduction
