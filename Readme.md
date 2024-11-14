@@ -31,7 +31,6 @@
 # 1. Introduction
 In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
 
-
 Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 Mrd.€have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
 Due to lack of publically available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach, it might still be useful for VAT Fraud as well.
 
@@ -62,10 +61,7 @@ This data looks the following and contains 180 Mio. of those transactions (rows)
 | 01.09.22 0:24   | 12        | 8006ADD30  | 12      | 8006ADD30  | 6473.62         | US Dollar          | 6473.62     | US Dollar        | Reinvestment   | 0             |
 | 01.09.22 0:17   | 11        | 800059120  | 1217    | 8006AD4E0  | 60562           | US Dollar          | 60562       | US Dollar        | ACH            | 0             |
 
-
-
 and includes the following columns:
-
 
 | Column             | Description                                                                 |
 |--------------------|-----------------------------------------------------------------------------|
@@ -81,39 +77,41 @@ and includes the following columns:
 | Payment Format     | The method or format used for the payment (e.g., Reinvestment, Cheque, ACH).|
 | Is Laundering      | Indicates whether the transaction is suspected of money laundering (0 = No).|
 
-
 A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
-# 3. Project plan:
-## 3.1 Dataset Collection and Preprocessing
+# Implementation
+The core concept here is a neurosymbolic approach, combining symbolic AI (logics, rules) and graph neural networks. 
+
+
+
+# Appendix (A):  Project plan
+## A.1 Dataset Collection and Preprocessing
 - **Research and Identify Suitable Datasets**: 10 hours
 - **Data Cleaning and Preprocessing**: 20 hours
 - **Feature Engineering**: 10 hours
 
-## 3.2 Designing and Building the Graph Neural Network
+## A.2 Designing and Building the Graph Neural Network
 - **Literature Review on Graph Neural Networks**: 10 hours
 - **Network Architecture Design**: 15 hours
 - **Implementation of the Network**: 20 hours
 
-## 3.3 Training and Fine-Tuning the Network
+## A.3 Training and Fine-Tuning the Network
 - **Initial Model Training**: 20 hous
 - **Hyperparameter Tuning**: 15 hours
 - **Validation and Testing**: 15 hours
 
-## 3.4 Building an Application to Present Results
+## A.4 Building an Application to Present Results
 - **Design User Interface**: 10 hours
 - **Develop Application Backend**: 15 hours
 - **Integrate Model with Application**: 10 hours
 
-## 3.5 Writing the Final Report
+## A.5 Writing the Final Report
 - **Drafting the Report Structure**: 5 hours
 - **Writing and Editing Content**: 15 hours
 - **Creating Visualizations and Appendices**: 5 hours
 
-## 3.6 Preparing the Presentation
+## A.6 Preparing the Presentation
 - **Design Presentation Slides**: 5 hours
 - **Rehearse Presentation Delivery**: 5 hours
 
 
-# Implementation
-The core concept here is a neurosymbolic approach, combining symbolic AI (logics, rules) and graph neural networks. 
