@@ -79,7 +79,21 @@ and includes the following columns:
 A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
 # Implementation
-The core concept here is a neuro-symbolic approach, combining symbolic AI (logics, rules) and graph neural networks. 
+The core concept here is a neuro-symbolic approach, combining symbolic AI (logics, rules) and graph neural networks.
+My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
+
+## Geometry-based Preprocessing
+For this part, I utilized geometric models to preselect the networks on which the GNNs are trained and tested.
+I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant network parts.
+In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
+To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
+
+
+
+
+## Graph Neural Networks
+
+
 
 
 
