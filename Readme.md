@@ -152,6 +152,73 @@ This then translates to the following geometric patterns:
 - **Rule 4.** Look for paths with several bifurcation points, and study their behavior from those points.
 
 - **Rule 5.** Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
+
+I then used those rules for feature engineering and (sub) graph selection: 
+
+### Rule 1: Look for paths with proportionally important part of nodes not as highly connected
+```
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
+WHERE start <> end
+WITH path, nodes(path) AS pathNodes
+WITH path, pathNodes, 
+     avg(size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-())) AS avgDegree,
+     [node IN pathNodes WHERE size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-()) < avg(size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-()) FOR node IN pathNodes)] AS lowDegreeNodes
+WHERE toFloat(size(lowDegreeNodes)) / size(pathNodes) >= 0.3  // At least 30% of nodes have below-average degree
+RETURN path, lowDegreeNodes
+ORDER BY size(pathNodes) DESC
+LIMIT 10
+```
+
+### Rule 2: Do not restrict paths to a particular community
+This rule is implicitly followed by not including any community-based filters in our queries.
+
+
+### Rule 3: Do not restrict path length
+We'll use variable-length relationships in our queries to allow for paths of any length. However, for performance reasons, we might need to set an upper limit in practice
+
+### Rule 4: Look for paths with several bifurcation points
+```
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
+WHERE start <> end
+WITH path, nodes(path) AS pathNodes
+WITH path, pathNodes,
+     [node IN pathNodes WHERE size((node)-[:TRANSFERRED_TO]->()) > 1 OR size((node)<-[:TRANSFERRED_TO]-()) > 1] AS bifurcationPoints
+WHERE size(bifurcationPoints) >= 3  // At least 3 bifurcation points
+RETURN path, bifurcationPoints
+ORDER BY size(bifurcationPoints) DESC
+LIMIT 10
+```
+
+
+### Rule 5: Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
+```
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(start)
+WHERE length(path) > 2  // Exclude trivial cycles
+RETURN path
+ORDER BY length(path)
+LIMIT 10
+```
+
+
+## Combined Query for the Pre-Processing: 
+```
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
+WHERE start = end AND length(path) > 2  // Cycles only, non-trivial
+WITH path, nodes(path) AS pathNodes
+WITH path, pathNodes, 
+     avg(size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-())) AS avgDegree,
+     [node IN pathNodes WHERE size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-()) < avg(size((node)-[:TRANSFERRED_TO]-()) + size((node)<-[:TRANSFERRED_TO]-()) FOR node IN pathNodes)] AS lowDegreeNodes,
+     [node IN pathNodes WHERE size((node)-[:TRANSFERRED_TO]->()) > 1 OR size((node)<-[:TRANSFERRED_TO]-()) > 1] AS bifurcationPoints
+WHERE toFloat(size(lowDegreeNodes)) / size(pathNodes) >= 0.3  // Rule 1
+  AND size(bifurcationPoints) >= 3  // Rule 4
+RETURN path, lowDegreeNodes, bifurcationPoints,
+       [r IN relationships(path) | r.amount_paid] AS amounts,
+       [r IN relationships(path) | r.currency_paid] AS currencies,
+       [r IN relationships(path) | r.time_of_transaction] AS timestamps
+ORDER BY size(pathNodes) DESC
+LIMIT 10
+```
+
 ## Graph Neural Networks
 
 
