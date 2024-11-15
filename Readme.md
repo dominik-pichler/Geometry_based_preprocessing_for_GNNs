@@ -82,6 +82,12 @@ A more in-depth dataset analysis can be found [here](https://www.kaggle.com/data
 The core concept here is a neuro-symbolic approach, combining symbolic AI (logics, rules) and graph neural networks.
 My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
 
+## Database
+I used a dockerized Neo4j database to store the in (2) mentioned dataset as graph, for further analysis.
+The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py`
+For information about the thereby created graph, you can run `src/stats/Neo4jStatisticsReport.py` to obtain a data report.
+
+
 ## Geometry-based Preprocessing
 For this part, I utilized geometric models to preselect the networks on which the GNNs are trained and tested.
 I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant network parts.
@@ -99,8 +105,8 @@ To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfi
 
 # Appendix (A):  Project plan
 ## A.1 Dataset Collection and Preprocessing
-- **Research and Identify Suitable Datasets**: 10 hours
-- **Data Cleaning and Preprocessing**: 20 hours
+- **~Research and Identify Suitable Datasets~**: 10 hours
+- **~Data Cleaning and Preprocessing~**: 20 hours
 - **Feature Engineering**: 10 hours
 
 ## A.2 Designing and Building the Graph Neural Network
