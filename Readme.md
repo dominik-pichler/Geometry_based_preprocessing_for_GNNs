@@ -222,10 +222,10 @@ All of the above eventually yields a reduced graph that can be used for the GNN 
 ## A.1 Dataset Collection and Preprocessing
 - **~Research and Identify Suitable Datasets~**: 10 hours
 - **~Data Cleaning and Preprocessing~**: 20 hours
-- **~Feature Engineering**~: 10 hours
+- **~Feature Engineering~**: 10 hours
 
 ## A.2 Designing and Building the Graph Neural Network
-- **~Literature Review on Graph Neural Networks**: 10 hours
+- **~Literature Review on Graph Neural Networks~**: 10 hours
 - **Network Architecture Design**: 15 hours
 - **Implementation of the Network**: 20 hours
 
