@@ -201,7 +201,7 @@ LIMIT 10
 
 
 ## Combined Query for the Pre-Processing: 
-```
+```cypher
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start = end AND length(path) > 2  // Cycles only, non-trivial
 WITH path, nodes(path) AS pathNodes
