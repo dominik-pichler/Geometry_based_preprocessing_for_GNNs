@@ -84,7 +84,26 @@ My own Method consists of combining geometry-based preprocessing with powerful G
 
 ## Database
 I used a dockerized Neo4j database to store the in (2) mentioned dataset as graph, for further analysis.
-The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py`
+The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
+
+```
+        MERGE (fromBank:Bank {id: $From_Bank})
+        MERGE (toBank:Bank {id: $To_Bank})
+        MERGE (fromAccount:Account {id: $From_Account})
+        MERGE (toAccount:Account {id: $To_Account})
+        
+        MERGE (fromBank)-[:BANK_OWNS_ACCOUNT]->(fromAccount)
+        MERGE (toBank)-[:BANK_OWNS_ACCOUNT]->(toAccount)
+                
+        CREATE (fromAccount)-[:TRANSFERRED_TO {
+            amount_paid: $Amount_Paid, 
+            currency_paid: $Payment_Currency, 
+            time_of_transaction: $timestamp
+        }]->(toAccount)        
+        
+```
+
+
 For information about the thereby created graph, you can run `src/stats/Neo4jStatisticsReport.py` to obtain a data report.
 
 
@@ -94,7 +113,14 @@ I expect this to increase the efficiency, as I hope to increase the quality of t
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
 To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
 
+In this paper, the authors documented the following geometric elements: 
+- A **path** is a finite sequence of distinct edges joining a sequence of distinct vertices.
 
+- A **circuit** is a non-empty path in which the first and last vertices are repeated.
+
+- A **cycle** or simple circuit is a circuit in which the only repeated vertices are the first and the last vertices. If there are no external edges connecting any two of its vertices it is called a chordless cycle or hole.
+
+- A **clique** is a set of vertices for which the corresponding subgraph is a complete graph. A maximal clique is a clique that is not properly contained in a larger one. A clique with k vertices will be called a k-clique (although there are other notions with the same name in the literature)
 
 
 ## Graph Neural Networks
