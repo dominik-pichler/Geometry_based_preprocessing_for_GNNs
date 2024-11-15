@@ -86,21 +86,20 @@ My own Method consists of combining geometry-based preprocessing with powerful G
 I used a dockerized Neo4j database to store the in (2) mentioned dataset as graph, for further analysis.
 The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
 
-```
-        MERGE (fromBank:Bank {id: $From_Bank})
-        MERGE (toBank:Bank {id: $To_Bank})
-        MERGE (fromAccount:Account {id: $From_Account})
-        MERGE (toAccount:Account {id: $To_Account})
+```cypher
+MERGE (fromBank:Bank {id: $From_Bank})
+MERGE (toBank:Bank {id: $To_Bank})
+MERGE (fromAccount:Account {id: $From_Account})
+MERGE (toAccount:Account {id: $To_Account})
         
-        MERGE (fromBank)-[:BANK_OWNS_ACCOUNT]->(fromAccount)
-        MERGE (toBank)-[:BANK_OWNS_ACCOUNT]->(toAccount)
+MERGE (fromBank)-[:BANK_OWNS_ACCOUNT]->(fromAccount)
+MERGE (toBank)-[:BANK_OWNS_ACCOUNT]->(toAccount)
                 
-        CREATE (fromAccount)-[:TRANSFERRED_TO {
-            amount_paid: $Amount_Paid, 
-            currency_paid: $Payment_Currency, 
-            time_of_transaction: $timestamp
-        }]->(toAccount)        
-        
+CREATE (fromAccount)-[:TRANSFERRED_TO {
+        amount_paid: $Amount_Paid, 
+        currency_paid: $Payment_Currency, 
+        time_of_transaction: $timestamp
+}]->(toAccount)                
 ```
 
 
@@ -156,7 +155,7 @@ This then translates to the following geometric patterns:
 I then used those rules for feature engineering and (sub) graph selection: 
 
 ### Rule 1: Look for paths with proportionally important part of nodes not as highly connected
-```
+```cypher
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start <> end
 WITH path, nodes(path) AS pathNodes
@@ -177,7 +176,7 @@ This rule is implicitly followed by not including any community-based filters in
 We'll use variable-length relationships in our queries to allow for paths of any length. However, for performance reasons, we might need to set an upper limit in practice
 
 ### Rule 4: Look for paths with several bifurcation points
-```
+```cypher
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start <> end
 WITH path, nodes(path) AS pathNodes
@@ -191,7 +190,7 @@ LIMIT 10
 
 
 ### Rule 5: Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
-```
+```cypher
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(start)
 WHERE length(path) > 2  // Exclude trivial cycles
 RETURN path
