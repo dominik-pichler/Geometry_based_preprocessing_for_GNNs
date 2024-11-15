@@ -109,6 +109,7 @@ For information about the thereby created graph, you can run `src/stats/Neo4jSta
 
 ## Geometry-based Preprocessing
 For this part, I utilized geometric models to preselect the networks on which the GNNs are trained and tested.
+
 I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant network parts.
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
 To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
@@ -123,6 +124,34 @@ In this paper, the authors documented the following geometric elements:
 - A **clique** is a set of vertices for which the corresponding subgraph is a complete graph. A maximal clique is a clique that is not properly contained in a larger one. A clique with k vertices will be called a k-clique (although there are other notions with the same name in the literature)
 
 
+
+In order to identify (sub)graphs worth preselecting, I stick to the general definition of *Money Laundering* by the **Financial Action Task Force (FATF)** that defines it as *the process by
+which money generated through criminal activity appears to have come from a legitimate source.*
+So based on the definition above, some characteristic behaviors of money laundry can, and have been derived by the **FATF** and **UNODC**:
+
+
+- **Rule 1.** The money launderer agent's interactions do not grow rapidly because it is preferable to maintain only few interactions with other agents and to keep them as anonymous or covert as possible.
+
+- **Rule 2.** The money launderer agent does not impose restrictions on the geographical distance required for those interactions. This includes the transference of money between a non-haven jurisdiction and a tax haven jurisdiction.
+
+- **Rule 3.** The money launderer agent does not care how many transactions are needed to clean the illegal money (cycle), resorting to deposits triangulation between the same agents.
+
+- **Rule 4.** The money launderer agent employs the breaking up of large amounts of money into smaller amounts to avoid suspicions. The money is then deposited into one or more bank accounts or other financial instruments either by different persons or by a single person over a period of time.
+
+- **Rule 5.** After a process of money laundering interactions is initiated, it is to be expected that at some point (at least part of) the involved money returns to the money launderer agent completing a cycle.
+
+
+This then translates to the following geometric patterns: 
+
+- **Rule 1.** Look for paths for which a proportionally important part of their nodes are not as highly connected as the rest.
+
+- **Rule 2.** Do not restrict the location of those paths to be confined to a particular community (or other subset) of the graph.
+
+- **Rule 3.** The length of the paths considered should not be restricted.
+
+- **Rule 4.** Look for paths with several bifurcation points, and study their behavior from those points.
+
+- **Rule 5.** Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
 ## Graph Neural Networks
 
 
