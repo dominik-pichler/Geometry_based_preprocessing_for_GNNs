@@ -44,6 +44,9 @@ ORDER BY length(path)
 LIMIT 10
 
 
+
+
+//TODO: Combine Rules with Data Fetching.
 // Fetching data for GNNS.
 MATCH (from)-[r:TRANSFERRED_TO]->(to)
 RETURN r.amount_paid

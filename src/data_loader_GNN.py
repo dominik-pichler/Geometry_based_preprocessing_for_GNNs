@@ -3,13 +3,13 @@ import numpy as np
 import torch
 import logging
 import itertools
-from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
+from src.data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
 
 def get_data(args, data_config):
 
     '''Loads the AML transaction data from Neo4j database.
-    1. The data is loaded from the csv and the necessary features are chosen.
+    1. The data is loaded from the dockerized database and the necessary features are chosen.
     2. The data is split into training, validation and test data.
     3. PyG Data objects are created with the respective data splits.
     '''

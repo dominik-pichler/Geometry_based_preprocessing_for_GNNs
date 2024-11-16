@@ -1,7 +1,7 @@
 import time
 import logging
 from util import create_parser, set_seed, logger_setup
-from data_loading import get_data
+from data_loader_GNN import get_data
 from training import train_gnn
 from inference import infer_gnn
 import json
