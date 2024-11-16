@@ -1,3 +1,4 @@
+
 // Rule 1
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start <> end
@@ -41,3 +42,11 @@ WHERE length(path) > 2  // Exclude trivial cycles
 RETURN path
 ORDER BY length(path)
 LIMIT 10
+
+
+// Fetching data for GNNS.
+MATCH (from)-[r:TRANSFERRED_TO]->(to)
+RETURN r.amount_paid
+RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,
+                   r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency,
+                   r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering

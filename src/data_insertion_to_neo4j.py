@@ -48,7 +48,9 @@ def insert_and_connect_data(tx, row_data):
         CREATE (fromAccount)-[:TRANSFERRED_TO {
             amount_paid: $Amount_Paid, 
             currency_paid: $Payment_Currency, 
-            time_of_transaction: $timestamp
+            time_of_transaction: $timestamp,
+            payment_format: $Payment_Format,
+            is_laundering: $Is_Laundering,
         }]->(toAccount)        
         """
 
