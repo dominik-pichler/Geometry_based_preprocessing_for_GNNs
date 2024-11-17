@@ -38,9 +38,17 @@ def get_data(args, data_config):
     print(df_edges.head())
     logging.info(f'Available Edge Features: {df_edges.columns.tolist()}')
 
+    df_edges['Timestamp'] = pd.to_datetime(df_edges['Timestamp'])
+
     df_edges['Timestamp'] = df_edges['Timestamp'] - df_edges['Timestamp'].min()
+    print(f"--------{df_edges.head()}--------")
+
+    df_edges['from_id'] = pd.to_numeric(df_edges['from_id'], errors='coerce')
+    df_edges['to_id'] = pd.to_numeric(df_edges['to_id'], errors='coerce')
+    print(f"--------{df_edges.head()}--------")
 
     max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1
+    print(f"--------{max_n_id}--------")
     df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
     timestamps = torch.Tensor(df_edges['Timestamp'].to_numpy())
     y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
