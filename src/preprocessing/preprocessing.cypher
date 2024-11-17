@@ -1,3 +1,6 @@
+// Reset:
+MATCH(N) DETACH DELETE N
+
 
 // Rule 1
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)

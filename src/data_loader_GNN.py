@@ -15,7 +15,7 @@ def get_data(args, data_config):
     '''
 
     # Neo4j connection details
-    uri = "bolt://localhost:7687"  # Local docker container
+    uri = "bolt://localhost:7474"  # Local docker container
     user = "neo4j"
     password = "password"
 

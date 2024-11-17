@@ -46,8 +46,6 @@ For this purpose, I am using the following dataset:
 
 This data looks the following and contains 180 Mio. of those transactions (rows), with a high and low Laundering-Transaction Share.
 
-
-
 # 2. Dataset
 
 | Timestamp       | From Bank | Account    | To Bank | Account    | Amount Received | Receiving Currency | Amount Paid | Payment Currency | Payment Format | Is Laundering |
@@ -107,7 +105,7 @@ For information about the thereby created graph, you can run `src/stats/Neo4jSta
 
 
 ## Geometry-based Preprocessing
-For this part, I utilized geometric models to preselect the networks on which the GNNs are trained and tested.
+For this part, I utilized geometric models to preselect the networks on which the Graph (Neural) Nets are trained and tested.
 
 I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant network parts.
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.

@@ -50,7 +50,7 @@ def insert_and_connect_data(tx, row_data):
             currency_paid: $Payment_Currency, 
             time_of_transaction: $timestamp,
             payment_format: $Payment_Format,
-            is_laundering: $Is_Laundering,
+            is_laundering: $Is_Laundering
         }]->(toAccount)        
         """
 
