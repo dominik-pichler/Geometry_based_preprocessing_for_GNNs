@@ -210,9 +210,53 @@ RETURN path
 ORDER BY length(path)
 LIMIT 10
 ```
-
 All of the above eventually yields a reduced graph that can be used for the GNN Training and Testing.
 ## Graph Neural Networks
+For comprehensive Analysis, multiple NNs have been implemented and tested. More specifically, the following: 
+- GATe (Graph Attention Network with edge features)
+- GINe (Graph Isomorphism Network with edge features)
+- PNA (Principal Neighbourhood Aggregation)
+- RGCN (Relational Graph Convolutional Network)
+
+## GATe (Graph Attention Network with edge features)
+
+GATe is an extension of the original Graph Attention Network (GAT) that incorporates edge features into the attention mechanism. Key characteristics include:
+
+- Attention mechanism that considers both node and edge features together
+- Delivers improved performance on graphs with rich edge information
+- Possesses the ability to capture complex relationships between nodes and edges
+
+GATe has shown promising results in tasks where edge attributes are crucial, such as molecular property prediction and social network analysis.
+
+## GINe (Graph Isomorphism Network with edge features)
+
+GINe is a variant of the Graph Isomorphism Network (GIN) that also takes edge features into account. Notable aspects include:
+
+- Shines at preserving the expressive power of GIN for node and graph-level tasks
+- Incorporates edge features in the message passing step
+- Suitable for graphs where edge attributes carry important information
+
+This model has been particularly effective in chemical and biological applications where bond types and other edge properties are significant.
+
+## PNA (Principal Neighbourhood Aggregation)
+
+PNA is a GNN architecture designed to be more adaptable to **diverse graph structures**. Key features include:
+
+- Uses multiple aggregators (mean, max, min, standard deviation)
+- Employs degree-scalers to adjust for varying node degrees
+- Combines different aggregators and scalers for robust feature extraction
+
+PNA has demonstrated state-of-the-art performance on various benchmarks, especially in tasks involving **graphs with heterogeneous structures**.
+
+## RGCN (Relational Graph Convolutional Network)
+
+RGCN is an extension of Graph Convolutional Networks (GCN) designed to handle multi-relational graphs. Important characteristics include:
+
+- Supports multiple types of relationships between nodes
+- Uses relation-specific weight matrices for different edge types
+- Effective for knowledge graphs and other multi-relational data
+
+RGCN has been successfully applied in various domains, including **knowledge base completion, entity classification, and link prediction in heterogeneous networks**.
 
 
 
