@@ -38,7 +38,7 @@ def create_parser():
     #Misc
     parser.add_argument("--seed", default=1, type=int, help="Select the random seed for reproducability")
     parser.add_argument("--tqdm", action='store_true', help="Use tqdm logging (when running interactively in terminal)")
-    parser.add_argument("--data", default=None, type=str, help="Select the AML dataset. Needs to be either small or medium.", required=True)
+    parser.add_argument("--data", default=None, type=str, help="Select the AML dataset. Needs to be either small or medium.")
     parser.add_argument("--model", default=None, type=str, help="Select the model architecture. Needs to be one of [gin, gat, rgcn, pna]", required=True)
     parser.add_argument("--testing", action='store_true', help="Disable wandb logging while running the script in 'testing' mode.")
     parser.add_argument("--save_model", action='store_true', help="Save the best model.")

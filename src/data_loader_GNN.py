@@ -5,7 +5,7 @@ import logging
 import itertools
 from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
-
+from py2neo import Graph, Node, Relationship, NodeMatcher
 def get_data(args, data_config):
 
     '''Loads the AML transaction data from Neo4j database.
@@ -15,22 +15,26 @@ def get_data(args, data_config):
     '''
 
     # Neo4j connection details
-    uri = "bolt://localhost:7474"  # Local docker container
+    uri = "bolt://localhost:7687"  # Local docker container
     user = "neo4j"
     password = "password"
 
-    # Connect to Neo4j
-    driver = GraphDatabase.driver(uri, auth=(user, password))
+    # Connect to the Neo4j database
+    graph = Graph(uri, auth=(user, password))
 
     # Fetch edges (transactions) from Neo4j
-    with driver.session() as session:
-        result = session.run("""
-            MATCH (from)-[r:TRANSFERRED_TO]->(to)
-            RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,
-                   r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency,
-                   r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
-        """)
+    query = """
+        MATCH (from)-[r:TRANSFERRED_TO]->(to)
+        RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,
+               r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency,
+               r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
+    """
+
+    result = graph.run(query)
+
+    # Convert the result to a pandas DataFrame
     df_edges = pd.DataFrame([dict(record) for record in result])
+
     print(df_edges.head())
     logging.info(f'Available Edge Features: {df_edges.columns.tolist()}')
 
@@ -161,3 +165,4 @@ def get_data(args, data_config):
     logging.info(f'test data object: {te_data}')
 
     return tr_data, val_data, te_data, tr_inds, val_inds, te_inds
+

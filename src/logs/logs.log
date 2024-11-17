@@ -1,0 +1,17 @@
+2024-11-17 15:42:33,162 [INFO ] Random seed set as 1
+2024-11-17 15:42:33,162 [INFO ] Retrieving data
+2024-11-17 15:44:21,030 [INFO ] Random seed set as 1
+2024-11-17 15:44:21,030 [INFO ] Retrieving data
+2024-11-17 15:58:54,527 [INFO ] Random seed set as 1
+2024-11-17 15:58:54,527 [INFO ] Retrieving data
+2024-11-17 16:02:55,842 [INFO ] Random seed set as 1
+2024-11-17 16:02:55,842 [INFO ] Retrieving data
+2024-11-17 16:03:40,539 [INFO ] Random seed set as 1
+2024-11-17 16:03:40,540 [INFO ] Retrieving data
+2024-11-17 16:06:40,504 [INFO ] Random seed set as 1
+2024-11-17 16:06:40,504 [INFO ] Retrieving data
+2024-11-17 16:09:30,064 [INFO ] Random seed set as 1
+2024-11-17 16:09:30,064 [INFO ] Retrieving data
+2024-11-17 16:12:39,685 [INFO ] Random seed set as 1
+2024-11-17 16:12:39,685 [INFO ] Retrieving data
+2024-11-17 16:12:40,279 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format', 'Is_Laundering']
