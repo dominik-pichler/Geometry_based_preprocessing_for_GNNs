@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import logging
 import itertools
-from src.data_util import GraphData, HeteroData, z_norm, create_hetero_obj
+from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
 
 def get_data(args, data_config):
@@ -31,7 +31,7 @@ def get_data(args, data_config):
                    r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
         """)
     df_edges = pd.DataFrame([dict(record) for record in result])
-
+    print(df_edges.head())
     logging.info(f'Available Edge Features: {df_edges.columns.tolist()}')
 
     df_edges['Timestamp'] = df_edges['Timestamp'] - df_edges['Timestamp'].min()
