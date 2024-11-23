@@ -267,16 +267,22 @@ The combined approach of geometry-based preprocessing (GBPre) and GNNs can be fo
 A Python script for training Graph Neural Networks (GNN) for Anti-Money Laundering (AML) detection.
 
 ## Usage
-#### Required Arguments
+### Required Arguments
 `--model MODEL_NAME`: Specify the GNN architecture (gin, gat, rgcn, or pna)
 
-#### Optional Arguments
-Model Adaptations
+### Optional Arguments
+
+#### Model Adaptations
 `--GBPre`: Enable Geometry based Preprocessing (default: True)
+
 `--emlps`: Enable EMLP layers in GNN training
+
 `--reverse_mp`: Enable reverse message passing in GNN training
+
 `--ports`: Include port numbering features
+
 `--tds`: Include time delta features (time between transactions)
+
 `--ego`: Include ego ID features
 
 #### Training Parameters
