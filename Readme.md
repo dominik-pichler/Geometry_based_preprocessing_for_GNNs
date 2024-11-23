@@ -27,6 +27,59 @@
 3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` directory.
 4. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
 
+# Usage:
+### Required Arguments
+`--model MODEL_NAME`: Specify the GNN architecture (gin, gat, rgcn, or pna)
+
+### Optional Arguments
+
+#### Model Adaptations
+`--GBPre`: Enable Geometry based Preprocessing (default: True)
+
+`--emlps`: Enable EMLP layers in GNN training
+
+`--reverse_mp`: Enable reverse message passing in GNN training
+
+`--ports`: Include port numbering features
+
+`--tds`: Include time delta features (time between transactions)
+
+`--ego`: Include ego ID features
+
+#### Training Parameters
+`--batch_size`: Training batch size (default: 8192)
+
+`--n_epochs`: Number of training epochs (default: 100)
+
+`--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
+
+#### Data and Model Settings
+`--seed`: Random seed for reproducibility (default: 1)
+
+`--tqdm`: Enable progress bar for interactive terminal use
+
+`--testing`: Run in testing mode without wandb logging
+
+`--save_model`: Save the best performing model
+
+`--unique_name`: Specify unique identifier for model storage
+
+`--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
+
+`--inference`: Run inference only (requires --unique_name pointing to trained model)
+
+### Example Usage:
+```bash
+# Train a GAT model with default parameters
+python main.py --model gat
+
+# Train a GIN model with custom settings
+python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
+
+# Fine-tune a pre-trained PNA model
+python main.py --model pna --finetune --unique_name pretrained_model_name```
+```
+
 
 # 1. Introduction
 In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Geometry** and **Graph Neural Networks**.
@@ -262,63 +315,8 @@ RGCN has been successfully applied in various domains, including **knowledge bas
 ## 4. Putting everything together: 
 The combined approach of geometry-based preprocessing (GBPre) and GNNs can be found in `src/main.py`
 
-# GNN Training Script
 
-A Python script for training Graph Neural Networks (GNN) for Anti-Money Laundering (AML) detection.
-
-## Usage
-### Required Arguments
-`--model MODEL_NAME`: Specify the GNN architecture (gin, gat, rgcn, or pna)
-
-### Optional Arguments
-
-#### Model Adaptations
-`--GBPre`: Enable Geometry based Preprocessing (default: True)
-
-`--emlps`: Enable EMLP layers in GNN training
-
-`--reverse_mp`: Enable reverse message passing in GNN training
-
-`--ports`: Include port numbering features
-
-`--tds`: Include time delta features (time between transactions)
-
-`--ego`: Include ego ID features
-
-#### Training Parameters
-`--batch_size`: Training batch size (default: 8192)
-
-`--n_epochs`: Number of training epochs (default: 100)
-
-`--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
-
-#### Data and Model Settings
-`--seed`: Random seed for reproducibility (default: 1)
-
-`--tqdm`: Enable progress bar for interactive terminal use
-
-`--testing`: Run in testing mode without wandb logging
-
-`--save_model`: Save the best performing model
-
-`--unique_name`: Specify unique identifier for model storage
-
-`--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
-
-`--inference`: Run inference only (requires --unique_name pointing to trained model)
-
-### Example Usage:
-```bash
-# Train a GAT model with default parameters
-python main.py --model gat
-
-# Train a GIN model with custom settings
-python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
-
-# Fine-tune a pre-trained PNA model
-python main.py --model pna --finetune --unique_name pretrained_model_name```
-```
-
+--- 
 # Appendix (A):  Project plan
 ## A.1 Dataset Collection and Preprocessing
 - **~Research and Identify Suitable Datasets~**: 10 hours
