@@ -1,10 +1,14 @@
 import pandas as pd
 from neo4j import GraphDatabase
-import math
+from tqdm import tqdm
+
+
+
+rows_to_insert = 1000  # Change this value to insert more or fewer rows
 
 
 def load_demo_data():
-    return pd.read_csv('../data/LI-Small_Trans.csv', sep=',', nrows = 101)
+    return pd.read_csv('../data/LI-Small_Trans.csv', sep=',', nrows = rows_to_insert)
 
 
 def isNaN(num):
@@ -68,11 +72,10 @@ with driver.session() as session:
     session.run("CREATE CONSTRAINT account_id IF NOT EXISTS FOR (a:Account) REQUIRE a.id IS UNIQUE")
 
 # Specify the number of rows to insert
-rows_to_insert = 100  # Change this value to insert more or fewer rows
 
 # Insert data into Neo4j
 with driver.session() as session:
-    for index, row in df.iterrows():
+    for index, row in tqdm(df.iterrows()):
         try:
             if index >= rows_to_insert:
                 break  # Stop after inserting the specified number of rows

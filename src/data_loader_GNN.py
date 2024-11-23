@@ -23,6 +23,7 @@ def get_data(args, data_config):
     graph = Graph(uri, auth=(user, password))
 
     # Fetch edges (transactions) from Neo4j
+    #TODO: Add GBPre Filtering
     query = """
         MATCH (from)-[r:TRANSFERRED_TO]->(to)
         RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,

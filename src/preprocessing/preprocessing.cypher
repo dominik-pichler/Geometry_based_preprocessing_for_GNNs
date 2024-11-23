@@ -14,6 +14,29 @@ RETURN pathInfo.path AS path, pathInfo.length AS length, avgPathLength
 ORDER BY length DESC
 
 
+
+// Simplified Rule 1:
+// Find paths between different accounts
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
+WHERE start <> end
+
+// Calculate path lengths and average
+WITH path,
+     size(nodes(path)) AS pathLength,
+     avg(size(nodes(path))) AS avgPathLength
+
+// Filter paths longer than average
+WHERE pathLength > avgPathLength
+
+// Return results sorted by length
+RETURN path,
+       pathLength,
+       avgPathLength
+ORDER BY pathLength DESC
+
+
+
+
 // Rule 4
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start <> end

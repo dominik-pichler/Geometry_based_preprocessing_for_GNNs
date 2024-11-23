@@ -19,6 +19,8 @@
       |_ | _|
      (___|__)
 ```
+# TL;DR
+This repo contains thoughts and code on how to enhance GNNs Performance on Money Laundry Detection using Geometric Features. 
 
 
 # Setup
@@ -270,6 +272,9 @@ For comprehensive Analysis, multiple NNs have been implemented and tested. More 
 - GINe (Graph Isomorphism Network with edge features)
 - PNA (Principal Neighbourhood Aggregation)
 - RGCN (Relational Graph Convolutional Network)
+
+The selection has been explicitly designed to incorporate the evolution of GNN Paradigms over Time. 
+
 
 ### GATe (Graph Attention Network with edge features)
 
