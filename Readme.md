@@ -266,7 +266,7 @@ All of the above eventually yields a reduced graph that can be used for the GNN 
 
 ## 3. Graph Neural Networks
 For comprehensive Analysis, multiple NNs have been implemented and tested. More specifically, the following: 
-- GATe (Graph Attention Network with edge features)
+- GATe (Graph Attention Network with edge features) / GAT
 - GINe (Graph Isomorphism Network with edge features)
 - PNA (Principal Neighbourhood Aggregation)
 - RGCN (Relational Graph Convolutional Network)
@@ -278,6 +278,8 @@ GATe is an extension of the original Graph Attention Network (GAT) that incorpor
 - Attention mechanism that considers both node and edge features together
 - Delivers improved performance on graphs with rich edge information
 - Possesses the ability to capture complex relationships between nodes and edges
+
+![imgs/GAT.png](imgs/GAT.png)
 
 GATe has shown promising results in tasks where edge attributes are crucial, such as molecular property prediction and social network analysis.
 
