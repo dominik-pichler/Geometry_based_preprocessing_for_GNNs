@@ -218,7 +218,7 @@ For comprehensive Analysis, multiple NNs have been implemented and tested. More 
 - PNA (Principal Neighbourhood Aggregation)
 - RGCN (Relational Graph Convolutional Network)
 
-## GATe (Graph Attention Network with edge features)
+### GATe (Graph Attention Network with edge features)
 
 GATe is an extension of the original Graph Attention Network (GAT) that incorporates edge features into the attention mechanism. Key characteristics include:
 
@@ -228,7 +228,7 @@ GATe is an extension of the original Graph Attention Network (GAT) that incorpor
 
 GATe has shown promising results in tasks where edge attributes are crucial, such as molecular property prediction and social network analysis.
 
-## GINe (Graph Isomorphism Network with edge features)
+### GINe (Graph Isomorphism Network with edge features)
 
 GINe is a variant of the Graph Isomorphism Network (GIN) that also takes edge features into account. Notable aspects include:
 
@@ -238,7 +238,7 @@ GINe is a variant of the Graph Isomorphism Network (GIN) that also takes edge fe
 
 This model has been particularly effective in chemical and biological applications where bond types and other edge properties are significant.
 
-## PNA (Principal Neighbourhood Aggregation)
+### PNA (Principal Neighbourhood Aggregation)
 
 PNA is a GNN architecture designed to be more adaptable to **diverse graph structures**. Key features include:
 
@@ -248,7 +248,7 @@ PNA is a GNN architecture designed to be more adaptable to **diverse graph struc
 
 PNA has demonstrated state-of-the-art performance on various benchmarks, especially in tasks involving **graphs with heterogeneous structures**.
 
-## RGCN (Relational Graph Convolutional Network)
+### RGCN (Relational Graph Convolutional Network)
 
 RGCN is an extension of Graph Convolutional Networks (GCN) designed to handle multi-relational graphs. Important characteristics include:
 
@@ -259,9 +259,51 @@ RGCN is an extension of Graph Convolutional Networks (GCN) designed to handle mu
 RGCN has been successfully applied in various domains, including **knowledge base completion, entity classification, and link prediction in heterogeneous networks**.
 
 
-# 4. Putting everything together: 
+## 4. Putting everything together: 
+The combined approach of geometry-based preprocessing (GBPre) and GNNs can be found in `src/main.py`
 
+# GNN Training Script
 
+A Python script for training Graph Neural Networks (GNN) for Anti-Money Laundering (AML) detection.
+
+## Usage
+#### Required Arguments
+`--model MODEL_NAME`: Specify the GNN architecture (gin, gat, rgcn, or pna)
+
+#### Optional Arguments
+Model Adaptations
+`--GBPre`: Enable Geometry based Preprocessing (default: True)
+`--emlps`: Enable EMLP layers in GNN training
+`--reverse_mp`: Enable reverse message passing in GNN training
+`--ports`: Include port numbering features
+`--tds`: Include time delta features (time between transactions)
+`--ego`: Include ego ID features
+
+#### Training Parameters
+`--batch_size`: Training batch size (default: 8192)
+`--n_epochs`: Number of training epochs (default: 100)
+`--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
+
+#### Data and Model Settings
+`--seed`: Random seed for reproducibility (default: 1)
+`--tqdm`: Enable progress bar for interactive terminal use
+`--testing`: Run in testing mode without wandb logging
+`--save_model`: Save the best performing model
+`--unique_name`: Specify unique identifier for model storage
+`--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
+`--inference`: Run inference only (requires --unique_name pointing to trained model)
+
+### Example Usage:
+```bash
+# Train a GAT model with default parameters
+python main.py --model gat
+
+# Train a GIN model with custom settings
+python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
+
+# Fine-tune a pre-trained PNA model
+python main.py --model pna --finetune --unique_name pretrained_model_name```
+```
 
 # Appendix (A):  Project plan
 ## A.1 Dataset Collection and Preprocessing
