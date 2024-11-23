@@ -29,9 +29,9 @@
 
 
 # 1. Introduction
-In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Graph Neural Networks**.
-Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 Mrd.€have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
-Due to lack of publicly available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach, it might still be useful for VAT Fraud as well.
+In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Geometry** and **Graph Neural Networks**.
+Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 billion euros have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
+Due to lack of publicly available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach in combination with GNNs, it might still be useful for VAT Fraud as well.
 
 
 Therefore, I try to **bring my own method** to detect money laundering in the geometrical structures present in the IBM Transactions for Anti Money Laundering (AML) while orienting myself on the following three papers:
@@ -77,10 +77,10 @@ and includes the following columns:
 A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
 # Implementation
-The core concept here is a neuro-symbolic approach, combining symbolic AI (logics, rules) and graph neural networks.
+The core concept here is a neuro-symbolic approach, combining symbolic AI (logics / Rule-based approaches) and graph neural networks.
 My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
 
-## Database
+## 1. Setup
 I used a dockerized Neo4j database to store the in (2) mentioned dataset as graph, for further analysis.
 The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
 
@@ -104,10 +104,10 @@ CREATE (fromAccount)-[:TRANSFERRED_TO {
 For information about the thereby created graph, you can run `src/stats/Neo4jStatisticsReport.py` to obtain a data report.
 
 
-## Geometry-based Preprocessing
+## 2. Geometry-based Preprocessing
 For this part, I utilized geometric models to preselect the networks on which the Graph (Neural) Nets are trained and tested.
 
-I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant network parts.
+I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant sub-graphs.
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
 To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
 
@@ -140,13 +140,13 @@ So based on the definition above, some characteristic behaviors of money laundry
 
 This then translates to the following geometric patterns: 
 
-- **Rule 1.** Look for paths for which a proportionally important part of their nodes are not as highly connected as the rest.
+- **Rule 1.** Look for paths for which a proportionally important/central part of their nodes are not as highly connected as the rest.
 
 - **Rule 2.** Do not restrict the location of those paths to be confined to a particular community (or other subset) of the graph.
 
 - **Rule 3.** The length of the paths considered should not be restricted.
 
-- **Rule 4.** Look for paths with several bifurcation points, and study their behavior from those points.
+- **Rule 4.** Look for paths with several **bifurcation points** (Bifurcation points represent critical values in a system where sudden qualitative changes occur in its behavior. These changes manifest when small adjustments to parameter values cause significant shifts in the system's dynamics), and study their behavior from those points.
 
 - **Rule 5.** Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
 
@@ -202,6 +202,7 @@ ORDER BY SIZE(bifurcationPoints) DESC
 
 ### Rule 5: Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
 ```cypher
+
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(start)
 WHERE length(path) > 2  // Exclude trivial cycles
 RETURN path
@@ -209,7 +210,8 @@ ORDER BY length(path)
 LIMIT 10
 ```
 All of the above eventually yields a reduced graph that can be used for the GNN Training and Testing.
-## Graph Neural Networks
+
+## 3. Graph Neural Networks
 For comprehensive Analysis, multiple NNs have been implemented and tested. More specifically, the following: 
 - GATe (Graph Attention Network with edge features)
 - GINe (Graph Isomorphism Network with edge features)
@@ -257,6 +259,7 @@ RGCN is an extension of Graph Convolutional Networks (GCN) designed to handle mu
 RGCN has been successfully applied in various domains, including **knowledge base completion, entity classification, and link prediction in heterogeneous networks**.
 
 
+# 4. Putting everything together: 
 
 
 
