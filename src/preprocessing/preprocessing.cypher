@@ -16,24 +16,17 @@ ORDER BY length DESC
 
 
 // Simplified Rule 1:
-// Find paths between different accounts
+// Filter paths shorter than average
 MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
 WHERE start <> end
-
-// Calculate path lengths and average
-WITH path,
-     size(nodes(path)) AS pathLength,
-     avg(size(nodes(path))) AS avgPathLength
-
-// Filter paths longer than average
-WHERE pathLength > avgPathLength
-
-// Return results sorted by length
+WITH avg(size(nodes(path))) AS averagePathLength
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
+WHERE start <> end AND size(nodes(path)) < averagePathLength
 RETURN path,
-       pathLength,
-       avgPathLength
-ORDER BY pathLength DESC
-
+       size(nodes(path)) AS pathLength,
+       averagePathLength,
+       size(nodes(path)) - averagePathLength AS difference
+ORDER BY difference DESC
 
 
 
@@ -77,5 +70,8 @@ LIMIT 10
 MATCH (from)-[r:TRANSFERRED_TO]->(to)
 RETURN r.amount_paid
 RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,
-                   r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency,
-                   r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
+                   r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency, r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
+
+
+
+

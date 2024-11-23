@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 
 
-rows_to_insert = 1000  # Change this value to insert more or fewer rows
+rows_to_insert = 100  # Change this value to insert more or fewer rows
 
 
 def load_demo_data():
