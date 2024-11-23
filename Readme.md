@@ -274,6 +274,7 @@ A Python script for training Graph Neural Networks (GNN) for Anti-Money Launderi
 
 #### Model Adaptations
 `--GBPre`: Enable Geometry based Preprocessing (default: True)
+
 `--emlps`: Enable EMLP layers in GNN training
 
 `--reverse_mp`: Enable reverse message passing in GNN training
@@ -286,16 +287,24 @@ A Python script for training Graph Neural Networks (GNN) for Anti-Money Launderi
 
 #### Training Parameters
 `--batch_size`: Training batch size (default: 8192)
+
 `--n_epochs`: Number of training epochs (default: 100)
+
 `--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
 
 #### Data and Model Settings
 `--seed`: Random seed for reproducibility (default: 1)
+
 `--tqdm`: Enable progress bar for interactive terminal use
+
 `--testing`: Run in testing mode without wandb logging
+
 `--save_model`: Save the best performing model
+
 `--unique_name`: Specify unique identifier for model storage
+
 `--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
+
 `--inference`: Run inference only (requires --unique_name pointing to trained model)
 
 ### Example Usage:
