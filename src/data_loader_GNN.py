@@ -6,7 +6,8 @@ import itertools
 from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
 from py2neo import Graph, Node, Relationship, NodeMatcher
-def get_data(args, data_config):
+def get_data(args, GBpre:True):
+
 
     '''Loads the AML transaction data from Neo4j database.
     1. The data is loaded from the dockerized database and the necessary features are chosen.
@@ -23,13 +24,21 @@ def get_data(args, data_config):
     graph = Graph(uri, auth=(user, password))
 
     # Fetch edges (transactions) from Neo4j
-    #TODO: Add GBPre Filtering
-    query = """
-        MATCH (from)-[r:TRANSFERRED_TO]->(to)
-        RETURN from.id AS from_id, to.id AS to_id, r.time_of_transaction AS Timestamp,
-               r.amount_paid AS Amount_Received, r.currency_paid AS Received_Currency,
-               r.payment_format AS Payment_Format, r.is_laundering AS Is_Laundering
-    """
+
+    if GBpre:
+        with open('preprocessing/GBpre.cypher', 'r') as file:
+            query = file.read()
+    else:
+        query = """
+                MATCH (from)-[r:TRANSFERRED_TO]->(to)
+                RETURN from.id AS from_id, 
+                       to.id AS to_id, 
+                       r.time_of_transaction AS Timestamp,
+                       r.amount_paid AS Amount_Received, 
+                       r.currency_paid AS Received_Currency,
+                       r.payment_format AS Payment_Format, 
+                       r.is_laundering AS Is_Laundering
+                """
 
     result = graph.run(query)
 

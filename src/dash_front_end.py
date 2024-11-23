@@ -159,7 +159,7 @@ app.layout = html.Div([
                             className='border rounded p-4 text-center mb-4'
                         ),
                         dbc.Button(
-                            [html.I(className="fas fa-play mr-2"), "Run Inference"],
+                            [html.I(className="fas fa-play mr-2"), "  Run Inference"],
                             id='run-inference-button',
                             className='btn-custom-primary w-100'
                         )
@@ -180,39 +180,7 @@ app.layout = html.Div([
             ], md=6)
         ], className="mb-5"),
 
-        # Features Section
-        html.Div([
-            html.H2("Enterprise Features", className="section-title text-center", id="features"),
-            dbc.Row([
-                dbc.Col([
-                    dbc.Card([
-                        dbc.CardBody([
-                            html.I(className="fas fa-shield-alt feature-icon mb-3"),
-                            html.H4("Enterprise Security"),
-                            html.P("Bank-grade security with encryption at rest and in transit.")
-                        ], className="text-center")
-                    ])
-                ], md=4),
-                dbc.Col([
-                    dbc.Card([
-                        dbc.CardBody([
-                            html.I(className="fas fa-tachometer-alt feature-icon mb-3"),
-                            html.H4("High Performance"),
-                            html.P("Optimized inference pipeline for maximum throughput.")
-                        ], className="text-center")
-                    ])
-                ], md=4),
-                dbc.Col([
-                    dbc.Card([
-                        dbc.CardBody([
-                            html.I(className="fas fa-clock feature-icon mb-3"),
-                            html.H4("24/7 Support"),
-                            html.P("Round-the-clock enterprise support and monitoring.")
-                        ], className="text-center")
-                    ])
-                ], md=4),
-            ], className="mb-5")
-        ]),
+
 
         # About Section
         html.Div([

@@ -210,15 +210,11 @@ I then used those rules for feature engineering and (sub) graph selection:
 ### Rule 1: Look for paths with proportionally important part of nodes not as highly connected
 ```cypher
 
-MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
-WHERE start <> end
-WITH path, size(nodes(path)) AS pathLength
-WITH AVG(pathLength) AS avgPathLength, COLLECT({path: path, length: pathLength}) AS paths
-UNWIND paths AS pathInfo
-WITH pathInfo, avgPathLength
-WHERE pathInfo.length < avgPathLength
-RETURN pathInfo.path AS path, pathInfo.length AS length, avgPathLength
-ORDER BY length DESC
+MATCH path = (start:Account)-[rel:TRANSFERRED_TO]->(end:Account)
+WHERE start <> end AND size(nodes(path)) < averagePathLength
+RETURN start,
+       end,
+       [rel IN relationships(path) | properties(rel)] AS all_relationship_attributes
 ```
 
 ### Rule 2: Do not restrict paths to a particular community
@@ -229,40 +225,25 @@ This rule is implicitly followed by not including any community-based filters in
 We'll use variable-length relationships in our queries to allow for paths of any length. However, for performance reasons, we might need to set an upper limit in practice
 
 ### Rule 4: Look for paths with several bifurcation points
+
 ```cypher
-MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end:Account)
-WHERE start <> end
-WITH path, nodes(path) AS pathNodes
-
-// Unwind the path nodes to analyze each node individually
-UNWIND pathNodes AS node
-
-// Count outgoing and incoming TRANSFERRED_TO relationships using pattern comprehensions
-WITH node,
-     [n IN [(node)-[:TRANSFERRED_TO]->(x) | x] | n] AS outgoingRelationships,
-     [n IN [(x)<-[:TRANSFERRED_TO]-(node) | x] | n] AS incomingRelationships
-
-// Calculate the counts from the comprehensions
-WITH node, SIZE(outgoingRelationships) AS outgoingCount, SIZE(incomingRelationships) AS incomingCount
-
-// Filter nodes that have more than 1 incoming or outgoing relationship
-WITH COLLECT(node) AS bifurcationPoints
-WHERE SIZE(bifurcationPoints) >= 3  // At least 3 bifurcation points
-
-// Return paths and bifurcation points
-RETURN bifurcationPoints
-ORDER BY SIZE(bifurcationPoints) DESC
+MATCH path = (start:Account)-[r:TRANSFERRED_TO]->(end:Account)
+WITH start AS n, end AS m, COUNT(r) AS branch_count, COUNT(start) AS incoming_count, path
+WHERE branch_count > 1 OR incoming_count > 1
+RETURN n AS start,
+       m AS end,
+       [rel IN relationships(path) | properties(rel)] AS all_relationship_attributes
 ```
 
 
 ### Rule 5: Among the possible paths in the graph, closed paths or cycles are more relevant that simple paths.
-```cypher
 
-MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(start)
-WHERE length(path) > 2  // Exclude trivial cycles
-RETURN path
-ORDER BY length(path)
-LIMIT 10
+```cypher
+MATCH path = (start:Account)-[:TRANSFERRED_TO*]->(end)
+WHERE length(path) > 2 // Exclude trivial cycles
+RETURN start,
+       end,
+       [rel IN relationships(path) | properties(rel)] AS all_relationship_attributes
 ```
 All of the above eventually yields a reduced graph that can be used for the GNN Training and Testing.
 
