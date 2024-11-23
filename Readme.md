@@ -274,7 +274,6 @@ A Python script for training Graph Neural Networks (GNN) for Anti-Money Launderi
 
 #### Model Adaptations
 `--GBPre`: Enable Geometry based Preprocessing (default: True)
-
 `--emlps`: Enable EMLP layers in GNN training
 
 `--reverse_mp`: Enable reverse message passing in GNN training
