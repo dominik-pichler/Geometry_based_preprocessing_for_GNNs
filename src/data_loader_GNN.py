@@ -5,9 +5,10 @@ import logging
 import itertools
 from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
+from sklearn.preprocessing import LabelEncoder
+
 from py2neo import Graph, Node, Relationship, NodeMatcher
 def get_data(args, GBpre:True):
-
 
     '''Loads the AML transaction data from Neo4j database.
     1. The data is loaded from the dockerized database and the necessary features are chosen.
@@ -33,17 +34,36 @@ def get_data(args, GBpre:True):
                 MATCH (from)-[r:TRANSFERRED_TO]->(to)
                 RETURN from.id AS from_id, 
                        to.id AS to_id, 
-                       r.time_of_transaction AS Timestamp,
-                       r.amount_paid AS Amount_Received, 
-                       r.currency_paid AS Received_Currency,
-                       r.payment_format AS Payment_Format, 
-                       r.is_laundering AS Is_Laundering
+                       r.time_of_transaction,
+                       r.amount_paid, 
+                       r.currency_paid,
+                       r.payment_format, 
+                       r.is_laundering
                 """
 
     result = graph.run(query)
 
+
     # Convert the result to a pandas DataFrame
     df_edges = pd.DataFrame([dict(record) for record in result])
+
+
+    #TODO: This is hardcore stupid and needs to be simplified
+    exploded_df = df_edges.explode('all_relationship_attributes')
+
+    # Step 2: Convert dictionaries in the exploded column to individual columns
+    attributes_df = exploded_df['all_relationship_attributes'].apply(pd.Series)
+
+    df_edges = pd.concat([exploded_df[['from_id', 'to_id']], attributes_df], axis=1)
+
+    # Rename all columns
+    df_edges = df_edges.rename(columns={
+        'amount_paid': 'Amount_Received',
+        'payment_format': 'Payment_Format',
+        'is_laundering': 'Is_Laundering',
+        'currency_paid': 'Received_Currency',
+        'time_of_transaction': 'Timestamp'
+    })
 
     print(df_edges.head())
     logging.info(f'Available Edge Features: {df_edges.columns.tolist()}')
@@ -53,12 +73,28 @@ def get_data(args, GBpre:True):
     df_edges['Timestamp'] = df_edges['Timestamp'] - df_edges['Timestamp'].min()
     print(f"--------{df_edges.head()}--------")
 
+    logging.info(df_edges.loc[:, ['from_id', 'to_id']])
+    # Create a LabelEncoder instance
+
+    df_edges['from_id'] = df_edges['from_id'].astype(str)
+    df_edges['to_id'] = df_edges['to_id'].astype(str)
+    logging.info("------- POST STRING CONVERSION --------")
+    logging.info(df_edges.loc[:, ['from_id', 'to_id']])
+
+    le = LabelEncoder()
+
+    # Applying LabelEncoder on categorical columns
+    df_edges['from_id'] = le.fit_transform(df_edges['from_id'])
+    df_edges['to_id'] = le.fit_transform(df_edges['to_id'])
+
     df_edges['from_id'] = pd.to_numeric(df_edges['from_id'], errors='coerce')
     df_edges['to_id'] = pd.to_numeric(df_edges['to_id'], errors='coerce')
-    print(f"--------{df_edges.head()}--------")
 
     max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1
-    print(f"--------{max_n_id}--------")
+
+
+    logging.info(f'Available Node Features / Unique Accounts: {max_n_id}')
+
     df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
     timestamps = torch.Tensor(df_edges['Timestamp'].to_numpy())
     y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
@@ -72,7 +108,8 @@ def get_data(args, GBpre:True):
 
     logging.info(f'Edge features being used: {edge_features}')
     logging.info(f'Node features being used: {node_features} ("Feature" is a placeholder feature of all 1s)')
-
+    logging.info(df_edges.dtypes)
+    
     x = torch.tensor(df_nodes.loc[:, node_features].to_numpy()).float()
     edge_index = torch.LongTensor(df_edges.loc[:, ['from_id', 'to_id']].to_numpy().T)
     edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
