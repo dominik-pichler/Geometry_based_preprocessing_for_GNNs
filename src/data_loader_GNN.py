@@ -43,7 +43,6 @@ def get_data(args, GBpre:True):
 
     result = graph.run(query)
 
-
     # Convert the result to a pandas DataFrame
     df_edges = pd.DataFrame([dict(record) for record in result])
 
@@ -73,13 +72,8 @@ def get_data(args, GBpre:True):
     df_edges['Timestamp'] = df_edges['Timestamp'] - df_edges['Timestamp'].min()
     print(f"--------{df_edges.head()}--------")
 
-    logging.info(df_edges.loc[:, ['from_id', 'to_id']])
-    # Create a LabelEncoder instance
-
     df_edges['from_id'] = df_edges['from_id'].astype(str)
     df_edges['to_id'] = df_edges['to_id'].astype(str)
-    logging.info("------- POST STRING CONVERSION --------")
-    logging.info(df_edges.loc[:, ['from_id', 'to_id']])
 
     le = LabelEncoder()
 
@@ -92,11 +86,10 @@ def get_data(args, GBpre:True):
 
     max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1
 
-
     logging.info(f'Available Node Features / Unique Accounts: {max_n_id}')
-
     df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
-    timestamps = torch.Tensor(df_edges['Timestamp'].to_numpy())
+    timestamps = torch.Tensor(df_edges['Timestamp'].dt.total_seconds().to_numpy()) #TODO: Something here is off
+    logging.info(f'----- Timestamps:  {timestamps}')
     y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
 
     logging.info(f"Illicit ratio = {sum(y)} / {len(y)} = {sum(y) / len(y) * 100:.2f}%")
@@ -109,12 +102,28 @@ def get_data(args, GBpre:True):
     logging.info(f'Edge features being used: {edge_features}')
     logging.info(f'Node features being used: {node_features} ("Feature" is a placeholder feature of all 1s)')
     logging.info(df_edges.dtypes)
-    
+
     x = torch.tensor(df_nodes.loc[:, node_features].to_numpy()).float()
     edge_index = torch.LongTensor(df_edges.loc[:, ['from_id', 'to_id']].to_numpy().T)
+
+    # Data Converting
+    df_edges['Timestamp'] = df_edges['Timestamp'].dt.total_seconds() / ((3600 * 24)) #Really ?
+    label_encoder = LabelEncoder()
+
+    # Encode 'Payment_Format' column
+    df_edges['Payment_Format'] = label_encoder.fit_transform(df_edges['Payment_Format'])
+
+    # Encode 'Received_Currency' column
+    df_edges['Received_Currency'] = label_encoder.fit_transform(df_edges['Received_Currency'])
+
+
+    df_edges.to_csv("test.csv")
     edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
 
     n_days = int(timestamps.max() / (3600 * 24) + 1)
+    logging.info(f"====== {timestamps.max()} ====== {int(timestamps.max() / (3600 * 24) + 1)} ")
+
+
     n_samples = y.shape[0]
     logging.info(f'number of days and transactions in the data: {n_days} days, {n_samples} transactions')
 
@@ -134,6 +143,8 @@ def get_data(args, GBpre:True):
     d_ts = daily_totals
     I = list(range(len(d_ts)))
     split_scores = dict()
+
+    # TODO: split_scores ist immer leer. Warum? 
     for i, j in itertools.combinations(I, 2):
         if j >= i:
             split_totals = [d_ts[:i].sum(), d_ts[i:j].sum(), d_ts[j:].sum()]
@@ -144,7 +155,7 @@ def get_data(args, GBpre:True):
             split_scores[(i, j)] = score
         else:
             continue
-
+    logging.info(f'[SPLIT SCORES ANALYSIS: {split_scores} ]')
     i, j = min(split_scores, key=split_scores.get)
     # split contains a list for each split (train, validation and test) and each list contains the days that are part of the respective split
     split = [list(range(i)), list(range(i, j)), list(range(j, len(daily_totals)))]

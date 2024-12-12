@@ -1,527 +1,14 @@
-2024-11-23 20:10:19,876 [INFO ] Random seed set as 1
-2024-11-23 20:10:19,876 [INFO ] Retrieving data
-2024-11-23 20:10:21,034 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:10:21,055 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:10:21,249 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:10:21,249 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:10:21,257 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:10:21,261 [INFO ] ------- POST LABEL ENCODING --------
-2024-11-23 20:10:21,271 [INFO ] ------- POST NUMERIC CONVERSIOn --------
-2024-11-23 20:10:21,272 [INFO ]      from_id  to_id
-0        NaN    NaN
-0        NaN    NaN
-0        NaN    NaN
-1        NaN    NaN
-1        NaN    NaN
-..       ...    ...
-793      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-
-[3057 rows x 2 columns]
-2024-11-23 20:10:21,278 [INFO ] Available Node Features: nan
-2024-11-23 20:13:26,352 [INFO ] Random seed set as 1
-2024-11-23 20:13:26,352 [INFO ] Retrieving data
-2024-11-23 20:13:27,582 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:13:27,602 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:13:27,792 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:13:27,792 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:13:27,800 [INFO ] ------- POST LABEL ENCODING: --------
-2024-11-23 20:13:27,800 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:13:27,814 [INFO ] ------- POST NUMERIC CONVERSION --------
-2024-11-23 20:13:27,815 [INFO ]      from_id  to_id
-0        NaN    NaN
-0        NaN    NaN
-0        NaN    NaN
-1        NaN    NaN
-1        NaN    NaN
-..       ...    ...
-793      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-
-[3057 rows x 2 columns]
-2024-11-23 20:13:27,820 [INFO ] Available Node Features: nan
-2024-11-23 20:15:29,910 [INFO ] Random seed set as 1
-2024-11-23 20:15:29,910 [INFO ] Retrieving data
-2024-11-23 20:15:30,925 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:15:30,943 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:15:31,133 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:15:31,133 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:15:31,140 [INFO ] ------- POST LABEL ENCODING: --------
-2024-11-23 20:15:31,141 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:15:31,154 [INFO ] ------- POST NUMERIC CONVERSION --------
-2024-11-23 20:15:31,154 [INFO ]      from_id  to_id
-0        NaN    NaN
-0        NaN    NaN
-0        NaN    NaN
-1        NaN    NaN
-1        NaN    NaN
-..       ...    ...
-793      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-794      NaN    NaN
-
-[3057 rows x 2 columns]
-2024-11-23 20:15:31,160 [INFO ] Available Node Features: nan
-2024-11-23 20:17:03,306 [INFO ] Random seed set as 1
-2024-11-23 20:17:03,306 [INFO ] Retrieving data
-2024-11-23 20:17:04,291 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:17:04,309 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:17:04,494 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:17:04,494 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:17:04,501 [INFO ] ------- POST LABEL ENCODING: --------
-2024-11-23 20:17:04,501 [INFO ]      from_id  to_id
-0         10     31
-0         10     31
-0         10     31
-1         10     11
-1         10     11
-..       ...    ...
-793        2      2
-794        2      2
-794        2      2
-794        2      2
-794        2      2
-
-[3057 rows x 2 columns]
-2024-11-23 20:17:04,506 [INFO ] ------- POST NUMERIC CONVERSION --------
-2024-11-23 20:17:04,506 [INFO ]      from_id  to_id
-0         10     31
-0         10     31
-0         10     31
-1         10     11
-1         10     11
-..       ...    ...
-793        2      2
-794        2      2
-794        2      2
-794        2      2
-794        2      2
-
-[3057 rows x 2 columns]
-2024-11-23 20:17:04,511 [INFO ] Available Node Features: 35
-2024-11-23 20:17:04,552 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:17:04,553 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:17:04,553 [INFO ] Number of transactions = 3057
-2024-11-23 20:17:04,553 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:17:04,553 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:19:20,373 [INFO ] Random seed set as 1
-2024-11-23 20:19:20,374 [INFO ] Retrieving data
-2024-11-23 20:19:21,546 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:19:21,565 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:19:21,755 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:19:21,756 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:19:21,809 [INFO ] Available Node Features: 35
-2024-11-23 20:19:21,849 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:19:21,849 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:19:21,849 [INFO ] Number of transactions = 3057
-2024-11-23 20:19:21,849 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:19:21,849 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:20:24,802 [INFO ] Random seed set as 1
-2024-11-23 20:20:24,803 [INFO ] Retrieving data
-2024-11-23 20:20:25,612 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:20:25,629 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:20:25,832 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:20:25,832 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:20:25,887 [INFO ] Available Node Features: 35
-2024-11-23 20:20:25,929 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:20:25,929 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:20:25,929 [INFO ] Number of transactions = 3057
-2024-11-23 20:20:25,929 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:20:25,929 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:21:17,671 [INFO ] Random seed set as 1
-2024-11-23 20:21:17,671 [INFO ] Retrieving data
-2024-11-23 20:21:18,555 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:21:18,574 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:21:18,759 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:21:18,760 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:21:18,815 [INFO ] Available Node Features: 35
-2024-11-23 20:21:18,862 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:21:18,862 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:21:18,862 [INFO ] Number of transactions = 3057
-2024-11-23 20:21:18,863 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:21:18,863 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:24:56,056 [INFO ] Random seed set as 1
-2024-11-23 20:24:56,056 [INFO ] Retrieving data
-2024-11-23 20:24:56,840 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:24:56,858 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:24:57,047 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:24:57,048 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:24:57,055 [INFO ] Available Node Features / Unique Accounts: 35
-2024-11-23 20:24:57,096 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:24:57,096 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:24:57,096 [INFO ] Number of transactions = 3057
-2024-11-23 20:24:57,096 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:24:57,096 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:25:34,880 [INFO ] Random seed set as 1
-2024-11-23 20:25:34,880 [INFO ] Retrieving data
-2024-11-23 20:25:35,642 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:25:35,660 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:25:35,846 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:25:35,847 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:25:35,855 [INFO ] Available Node Features / Unique Accounts: 35
-2024-11-23 20:25:35,893 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:25:35,894 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:25:35,894 [INFO ] Number of transactions = 3057
-2024-11-23 20:25:35,894 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:25:35,894 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:26:59,851 [INFO ] Random seed set as 1
-2024-11-23 20:26:59,851 [INFO ] Retrieving data
-2024-11-23 20:27:00,656 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:27:00,673 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:27:00,863 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:27:00,863 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:27:00,871 [INFO ] Available Node Features / Unique Accounts: 35
-2024-11-23 20:27:00,911 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:27:00,911 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:27:00,911 [INFO ] Number of transactions = 3057
-2024-11-23 20:27:00,911 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:27:00,911 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:29:15,442 [INFO ] Random seed set as 1
-2024-11-23 20:29:15,442 [INFO ] Retrieving data
-2024-11-23 20:29:16,256 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
-2024-11-23 20:29:16,270 [INFO ]                     from_id                     to_id
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-0    {'id': '11_8000ECA90'}  {'id': '1120_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-1    {'id': '11_8000ECA90'}    {'id': '11_8000ECA90'}
-..                      ...                       ...
-793  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-794  {'id': '20_800168B70'}    {'id': '20_800168B70'}
-
-[3057 rows x 2 columns]
-2024-11-23 20:29:16,458 [INFO ] ------- POST STRING CONVERSION --------
-2024-11-23 20:29:16,459 [INFO ]                                   from_id                                 to_id
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-0       (_1:Account {id: '11_8000ECA90'})   (_5:Account {id: '1120_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-1       (_1:Account {id: '11_8000ECA90'})     (_1:Account {id: '11_8000ECA90'})
-..                                    ...                                   ...
-793  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-794  (_1092:Account {id: '20_800168B70'})  (_1092:Account {id: '20_800168B70'})
-
-[3057 rows x 2 columns]
-2024-11-23 20:29:16,466 [INFO ] Available Node Features / Unique Accounts: 35
-2024-11-23 20:29:16,508 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
-2024-11-23 20:29:16,508 [INFO ] Number of nodes (holdings doing transactions) = 35
-2024-11-23 20:29:16,508 [INFO ] Number of transactions = 3057
-2024-11-23 20:29:16,508 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
-2024-11-23 20:29:16,508 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
-2024-11-23 20:29:16,508 [INFO ] from_id                        int64
+2024-11-29 09:06:37,264 [INFO ] Random seed set as 1
+2024-11-29 09:06:37,265 [INFO ] Retrieving data
+2024-11-29 09:06:38,000 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
+2024-11-29 09:06:38,188 [INFO ] Available Node Features / Unique Accounts: 35
+2024-11-29 09:06:38,190 [INFO ] ----- Timestamps:  tensor([ 480.,  420.,    0.,  ...,  480., 1620.,  900.])
+2024-11-29 09:06:38,212 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
+2024-11-29 09:06:38,212 [INFO ] Number of nodes (holdings doing transactions) = 35
+2024-11-29 09:06:38,212 [INFO ] Number of transactions = 3057
+2024-11-29 09:06:38,212 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
+2024-11-29 09:06:38,212 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
+2024-11-29 09:06:38,212 [INFO ] from_id                        int64
 to_id                          int64
 Amount_Received              float64
 Payment_Format                object
@@ -529,3 +16,49 @@ Is_Laundering                  int64
 Received_Currency             object
 Timestamp            timedelta64[ns]
 dtype: object
+2024-11-29 09:06:38,240 [INFO ] ====== 1740.0 ====== 1 
+2024-11-29 09:06:38,240 [INFO ] number of days and transactions in the data: 1 days, 3057 transactions
+2024-11-29 09:10:05,084 [INFO ] Random seed set as 1
+2024-11-29 09:10:05,084 [INFO ] Retrieving data
+2024-11-29 09:10:05,824 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
+2024-11-29 09:10:06,019 [INFO ] Available Node Features / Unique Accounts: 35
+2024-11-29 09:10:06,021 [INFO ] ----- Timestamps:  tensor([ 480.,  420.,    0.,  ...,  480., 1620.,  900.])
+2024-11-29 09:10:06,043 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
+2024-11-29 09:10:06,043 [INFO ] Number of nodes (holdings doing transactions) = 35
+2024-11-29 09:10:06,043 [INFO ] Number of transactions = 3057
+2024-11-29 09:10:06,043 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
+2024-11-29 09:10:06,043 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
+2024-11-29 09:10:06,043 [INFO ] from_id                        int64
+to_id                          int64
+Amount_Received              float64
+Payment_Format                object
+Is_Laundering                  int64
+Received_Currency             object
+Timestamp            timedelta64[ns]
+dtype: object
+2024-11-29 09:10:06,073 [INFO ] ====== 1740.0 ====== 1 
+2024-11-29 09:10:06,073 [INFO ] number of days and transactions in the data: 1 days, 3057 transactions
+2024-11-29 09:10:06,076 [INFO ] [SPLIT SCORES ANALYSIS: ]
+2024-11-29 09:15:59,959 [INFO ] Random seed set as 1
+2024-11-29 09:15:59,959 [INFO ] Retrieving data
+2024-11-29 09:16:00,733 [INFO ] Available Edge Features: ['from_id', 'to_id', 'Amount_Received', 'Payment_Format', 'Is_Laundering', 'Received_Currency', 'Timestamp']
+2024-11-29 09:16:00,931 [INFO ] Available Node Features / Unique Accounts: 35
+2024-11-29 09:16:00,974 [INFO ] ----- Timestamps:  tensor([ 480.,  420.,    0.,  ...,  480., 1620.,  900.])
+2024-11-29 09:16:00,998 [INFO ] Illicit ratio = 0 / 3057 = 0.00%
+2024-11-29 09:16:00,998 [INFO ] Number of nodes (holdings doing transactions) = 35
+2024-11-29 09:16:00,998 [INFO ] Number of transactions = 3057
+2024-11-29 09:16:00,998 [INFO ] Edge features being used: ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
+2024-11-29 09:16:00,998 [INFO ] Node features being used: ['Feature'] ("Feature" is a placeholder feature of all 1s)
+2024-11-29 09:16:00,998 [INFO ] from_id                        int64
+to_id                          int64
+Amount_Received              float64
+Payment_Format                object
+Is_Laundering                  int64
+Received_Currency             object
+Timestamp            timedelta64[ns]
+dtype: object
+2024-11-29 09:16:01,027 [INFO ] ====== 1740.0 ====== 1 
+2024-11-29 09:16:01,027 [INFO ] number of days and transactions in the data: 1 days, 3057 transactions
+2024-11-29 09:16:01,039 [INFO ] [SPLIT SCORES ANALYSIS: {} ]
+2024-12-12 17:03:59,510 [INFO ] Random seed set as 1
+2024-12-12 17:03:59,510 [INFO ] Retrieving data

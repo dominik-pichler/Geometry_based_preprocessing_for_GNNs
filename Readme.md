@@ -22,16 +22,28 @@
 # TL;DR
 This repo contains thoughts and code on how to enhance GNNs Performance on Money Laundry Detection using Geometric Features. 
 
+# 1. System Architecture
+1. Docker Container containing a graph database (Neo4j) for the KG/PG Storage and Logical Inference/Preprocessing
+2. An model training service (`src/main.py`)
+3. An inference service consisting of: 
+   i.  Backend-Service (`TDB`)
+   ii. A web-based UI (`TDB`)
 
-# Setup
-1. Set up the DB Infrastructure via `docker-compose up -d`.
+# 2. Run Inference
+
+
+# 3. Train Models
+1. Set up the DB Infrastructure via `docker-compose up -d`. 
+   You should now see the database UI at `http://localhost:7687/`
 2. Install all needed packages via `poetry install`.
 3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` directory.
-4. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
+4. Spawn a new venv shell via `poetry shell`.
+5. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
+6. Run `src/main.py` with your desired configs to train models: 
 
-# Usage:
+
 ### Required Arguments
-`--model MODEL_NAME`: Specify the GNN architecture (gin, gat, rgcn, or pna)
+`--model MODEL_NAME`: Specify the GNN architecture (Options: `gin`, `gat`, `rgcn`, `pna`)
 
 ### Optional Arguments
 
@@ -69,6 +81,7 @@ This repo contains thoughts and code on how to enhance GNNs Performance on Money
 `--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
 
 `--inference`: Run inference only (requires --unique_name pointing to trained model)
+
 
 ### Example Usage:
 ```bash
@@ -317,12 +330,13 @@ The combined approach of geometry-based preprocessing (GBPre) and GNNs can be fo
 - **~Implementation of the Network~**: 20 hours
 
 ## A.3 Training and Fine-Tuning the Network
+- **Build Data Pipeline**
 - **Initial Model Training**: 20 hours
 - **Hyperparameter Tuning**: 15 hours
 - **Validation and Testing**: 15 hours
 
 ## A.4 Building an Application to Present Results
-- **Design User Interface**: 10 hours
+- **~Design User Interface~**: 10 hours
 - **Develop Application Backend**: 15 hours
 - **Integrate Model with Application**: 10 hours
 
