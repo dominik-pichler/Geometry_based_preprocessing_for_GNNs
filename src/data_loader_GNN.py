@@ -6,9 +6,12 @@ import itertools
 from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
 from neo4j import GraphDatabase
 from sklearn.preprocessing import LabelEncoder
+from ast import literal_eval
+from isodate import parse_duration
+import re
 
 from py2neo import Graph, Node, Relationship, NodeMatcher
-def get_data(args, GBpre:True):
+def get_data(args):
 
     '''Loads the AML transaction data from Neo4j database.
     1. The data is loaded from the dockerized database and the necessary features are chosen.
@@ -24,38 +27,42 @@ def get_data(args, GBpre:True):
     # Connect to the Neo4j database
     graph = Graph(uri, auth=(user, password))
 
-    # Fetch edges (transactions) from Neo4j
+# FETCHING edges (transactions) from Neo4j
 
-    if GBpre:
+    if args.GBPre:
+        logging.info("Running Geometric Preprocessing on the data")
         with open('preprocessing/GBpre.cypher', 'r') as file:
             query = file.read()
+        result = graph.run(query)
+        df_edges = pd.DataFrame([dict(record) for record in result])  # All nodes and edges
+
+        exploded_df = df_edges.explode('all_relationship_attributes')
+        # Step 2: Convert dictionaries in the exploded column to individual columns
+
+        attributes_df = exploded_df['all_relationship_attributes'].apply(pd.Series)
+
+        df_edges = pd.concat([exploded_df[['from_id', 'to_id']], attributes_df], axis=1)
+
     else:
+        logging.info("NOT Running Geometric Preprocessing on the data")
+
         query = """
                 MATCH (from)-[r:TRANSFERRED_TO]->(to)
                 RETURN from.id AS from_id, 
                        to.id AS to_id, 
-                       r.time_of_transaction,
-                       r.amount_paid, 
-                       r.currency_paid,
-                       r.payment_format, 
-                       r.is_laundering
+                       r.time_of_transaction as time_of_transaction ,
+                       r.amount_paid as amount_paid, 
+                       r.currency_paid as currency_paid,
+                       r.payment_format as payment_format, 
+                       r.is_laundering as is_laundering
                 """
+        result = graph.run(query)
+        df_edges = pd.DataFrame([dict(record) for record in result])  # All nodes and edges
+        logging.info(f"Finished loading data: {df_edges.columns}" )
 
-    result = graph.run(query)
-
+# GENERAL PREPROCESSING STUFF (You dont want to know)
     # Convert the result to a pandas DataFrame
-    df_edges = pd.DataFrame([dict(record) for record in result])
 
-
-    #TODO: This is hardcore stupid and needs to be simplified
-    exploded_df = df_edges.explode('all_relationship_attributes')
-
-    # Step 2: Convert dictionaries in the exploded column to individual columns
-    attributes_df = exploded_df['all_relationship_attributes'].apply(pd.Series)
-
-    df_edges = pd.concat([exploded_df[['from_id', 'to_id']], attributes_df], axis=1)
-
-    # Rename all columns
     df_edges = df_edges.rename(columns={
         'amount_paid': 'Amount_Received',
         'payment_format': 'Payment_Format',
@@ -64,64 +71,79 @@ def get_data(args, GBpre:True):
         'time_of_transaction': 'Timestamp'
     })
 
-    print(df_edges.head())
-    logging.info(f'Available Edge Features: {df_edges.columns.tolist()}')
-
-    df_edges['Timestamp'] = pd.to_datetime(df_edges['Timestamp'])
-
-    df_edges['Timestamp'] = df_edges['Timestamp'] - df_edges['Timestamp'].min()
-    print(f"--------{df_edges.head()}--------")
+    df_edges['Timestamp'] = (df_edges['Timestamp'] - df_edges['Timestamp'].min())
+    logging.info(f"TIMESTAMP PRE TENSTOR {df_edges['Timestamp']}")
 
     df_edges['from_id'] = df_edges['from_id'].astype(str)
     df_edges['to_id'] = df_edges['to_id'].astype(str)
 
-    le = LabelEncoder()
-
-    # Applying LabelEncoder on categorical columns
-    df_edges['from_id'] = le.fit_transform(df_edges['from_id'])
-    df_edges['to_id'] = le.fit_transform(df_edges['to_id'])
+    le = LabelEncoder(); df_edges['from_id'] = le.fit_transform(df_edges['from_id']);df_edges['to_id'] = le.fit_transform(df_edges['to_id'])
 
     df_edges['from_id'] = pd.to_numeric(df_edges['from_id'], errors='coerce')
     df_edges['to_id'] = pd.to_numeric(df_edges['to_id'], errors='coerce')
 
-    max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1
 
-    logging.info(f'Available Node Features / Unique Accounts: {max_n_id}')
-    df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
-    timestamps = torch.Tensor(df_edges['Timestamp'].dt.total_seconds().to_numpy()) #TODO: Something here is off
-    logging.info(f'----- Timestamps:  {timestamps}')
-    y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
 
-    logging.info(f"Illicit ratio = {sum(y)} / {len(y)} = {sum(y) / len(y) * 100:.2f}%")
-    logging.info(f"Number of nodes (holdings doing transactions) = {df_nodes.shape[0]}")
-    logging.info(f"Number of transactions = {df_edges.shape[0]}")
 
+    logging.info(f" ------ Finished shaping Neo4j Data: {df_edges} ------ ")
+
+
+# CONTINUUE
     edge_features = ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
     node_features = ['Feature']
 
-    logging.info(f'Edge features being used: {edge_features}')
-    logging.info(f'Node features being used: {node_features} ("Feature" is a placeholder feature of all 1s)')
-    logging.info(df_edges.dtypes)
+    max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1 # Number of edges
+    df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
+
+    # Apply the conversion function to the 'Duration' column
+
+    def process_list(lst):
+
+        # Add the first element to the second and multiply the second by 3600
+        return lst[1] * 86400 + lst[2]
+
+
+    df_edges['Timestamp'] = df_edges['Timestamp'].apply(process_list)
+    # Convert the 'TotalSeconds' column to a PyTorch tensor
+    df_edges.to_csv("Timestamps.csv")
+    timestamps = torch.tensor(df_edges['Timestamp'].to_numpy(), dtype=torch.int64)
+
+    logging.info(f"Timestamp-Tensor: {timestamps}***") # max 1740
+
+    y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
+
+    logging.info(f"Illicit ratio = {sum(y)} / {len(y)} = {sum(y) / len(y) * 100:.2f}%") # Share of fraud to none Fraud
+    logging.info(f"Number of nodes (holdings doing transactions) = {df_nodes.shape[0]}")
+    logging.info(f"Number of transactions = {df_edges.shape[0]}")
+
+
+    label_encoder = LabelEncoder()
+    df_edges['Payment_Format'] = label_encoder.fit_transform(df_edges['Payment_Format'])
+    df_edges['Received_Currency'] = label_encoder.fit_transform(df_edges['Received_Currency'])
+    df_edges['Amount_Received'] = df_edges['Amount_Received'].astype(float)
+
 
     x = torch.tensor(df_nodes.loc[:, node_features].to_numpy()).float()
     edge_index = torch.LongTensor(df_edges.loc[:, ['from_id', 'to_id']].to_numpy().T)
+    logging.info(f"features: {df_edges.loc[:, edge_features]}")
 
+    logging.info(f"Error Aua! {df_edges.loc[:, edge_features]}")
+    edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
+
+    logging.info(f"x: {x}")
+    logging.info(f"edge_index: {edge_index}")
+    logging.info(f"edge_attr: {edge_attr}")
     # Data Converting
-    df_edges['Timestamp'] = df_edges['Timestamp'].dt.total_seconds() / ((3600 * 24)) #Really ?
-    label_encoder = LabelEncoder()
-
-    # Encode 'Payment_Format' column
-    df_edges['Payment_Format'] = label_encoder.fit_transform(df_edges['Payment_Format'])
-
-    # Encode 'Received_Currency' column
-    df_edges['Received_Currency'] = label_encoder.fit_transform(df_edges['Received_Currency'])
 
 
-    df_edges.to_csv("test.csv")
+
+    logging.info(f"Edge attributes: {df_edges.loc[:, edge_features]}")
+    logging.info(f"List of edge features: {edge_features}")
     edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
 
     n_days = int(timestamps.max() / (3600 * 24) + 1)
-    logging.info(f"====== {timestamps.max()} ====== {int(timestamps.max() / (3600 * 24) + 1)} ")
+
+    logging.info(f"Max Timestamps [sec.]: {timestamps.max()} ======  Max Timestamps [days]]: {int(timestamps.max() / (3600 * 24) + 1)} ")
 
 
     n_samples = y.shape[0]
@@ -138,10 +160,14 @@ def get_data(args, GBpre:True):
         daily_inds.append(day_inds)
         daily_trans.append(day_inds.shape[0])
 
+    logging.info(f'daily irs: {daily_trans}')
     split_per = [0.6, 0.2, 0.2]
     daily_totals = np.array(daily_trans)
+    logging.info(f"Daily_totals: {daily_totals}")
     d_ts = daily_totals
-    I = list(range(len(d_ts)))
+
+    I = list(range(len(d_ts))) # creates a list of indices
+    logging.info(f"I: {I}")
     split_scores = dict()
 
     # TODO: split_scores ist immer leer. Warum? 
@@ -156,6 +182,8 @@ def get_data(args, GBpre:True):
         else:
             continue
     logging.info(f'[SPLIT SCORES ANALYSIS: {split_scores} ]')
+
+
     i, j = min(split_scores, key=split_scores.get)
     # split contains a list for each split (train, validation and test) and each list contains the days that are part of the respective split
     split = [list(range(i)), list(range(i, j)), list(range(j, len(daily_totals)))]

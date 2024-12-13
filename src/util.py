@@ -24,6 +24,7 @@ def create_parser():
     parser = argparse.ArgumentParser()
 
     #Adaptations
+    parser.add_argument("--GBPre", action='store_true', help="Enable Geometry based Preprocessing ", default=False)
     parser.add_argument("--emlps", action='store_true', help="Use emlps in GNN training")
     parser.add_argument("--reverse_mp", action='store_true', help="Use reverse MP in GNN training")
     parser.add_argument("--ports", action='store_true', help="Use port numberings in GNN training")

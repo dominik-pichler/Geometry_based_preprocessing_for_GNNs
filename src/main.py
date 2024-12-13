@@ -23,7 +23,7 @@ def main():
     logging.info("Retrieving data")
     t1 = time.perf_counter()
     
-    tr_data, val_data, te_data, tr_inds, val_inds, te_inds = get_data(args, data_config)
+    tr_data, val_data, te_data, tr_inds, val_inds, te_inds = get_data(args)
     
     t2 = time.perf_counter()
     logging.info(f"Retrieved data in {t2-t1:.2f}s")
