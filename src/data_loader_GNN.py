@@ -30,7 +30,7 @@ def get_data(args):
 # FETCHING edges (transactions) from Neo4j
 
     if args.GBPre:
-        logging.info("Running Geometric Preprocessing on the data")
+        logging.info("Ran Geometric Preprocessing on the data")
         with open('preprocessing/GBpre.cypher', 'r') as file:
             query = file.read()
         result = graph.run(query)
@@ -41,10 +41,10 @@ def get_data(args):
 
         attributes_df = exploded_df['all_relationship_attributes'].apply(pd.Series)
 
-        df_edges = pd.concat([exploded_df[['from_id', 'to_id']], attributes_df], axis=1)
+        df_edges = pd.concat([exploded_df[['from_id', 'to_id']], attributes_df], axis=1) #TODO: eigentlich müsste ich hier doch die IDs zu indizes umwandeln oder? ??
 
     else:
-        logging.info("NOT Running Geometric Preprocessing on the data")
+        logging.info("Did not run Geometric Preprocessing on the data")
 
         query = """
                 MATCH (from)-[r:TRANSFERRED_TO]->(to)
@@ -58,10 +58,8 @@ def get_data(args):
                 """
         result = graph.run(query)
         df_edges = pd.DataFrame([dict(record) for record in result])  # All nodes and edges
-        logging.info(f"Finished loading data: {df_edges.columns}" )
 
-# GENERAL PREPROCESSING STUFF (You dont want to know)
-    # Convert the result to a pandas DataFrame
+# GENERAL PREPROCESSING STUFF
 
     df_edges = df_edges.rename(columns={
         'amount_paid': 'Amount_Received',
@@ -71,52 +69,37 @@ def get_data(args):
         'time_of_transaction': 'Timestamp'
     })
 
-    df_edges['Timestamp'] = (df_edges['Timestamp'] - df_edges['Timestamp'].min())
-    logging.info(f"TIMESTAMP PRE TENSTOR {df_edges['Timestamp']}")
-
+# Datatype Conversion
+    df_edges['Timestamp'] = (df_edges['Timestamp'] - df_edges['Timestamp'].min()) # Normailization to turn dates into floats
     df_edges['from_id'] = df_edges['from_id'].astype(str)
     df_edges['to_id'] = df_edges['to_id'].astype(str)
-
     le = LabelEncoder(); df_edges['from_id'] = le.fit_transform(df_edges['from_id']);df_edges['to_id'] = le.fit_transform(df_edges['to_id'])
-
     df_edges['from_id'] = pd.to_numeric(df_edges['from_id'], errors='coerce')
     df_edges['to_id'] = pd.to_numeric(df_edges['to_id'], errors='coerce')
-
-
 
 
     logging.info(f" ------ Finished shaping Neo4j Data: {df_edges} ------ ")
 
 
-# CONTINUUE
+# Specifying relevant features for the following
     edge_features = ['Timestamp', 'Amount_Received', 'Received_Currency', 'Payment_Format']
     node_features = ['Feature']
 
-    max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1 # Number of edges
-    df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)})
+    max_n_id = df_edges.loc[:, ['from_id', 'to_id']].to_numpy().max() + 1 # Determining the number of edges for future index determination
+    df_nodes = pd.DataFrame({'NodeID': np.arange(max_n_id), 'Feature': np.ones(max_n_id)}) # 2 x number of edges matrix with default features of 1.0. Needed for #TODO
 
-    # Apply the conversion function to the 'Duration' column
-
-    def process_list(lst):
-
-        # Add the first element to the second and multiply the second by 3600
-        return lst[1] * 86400 + lst[2]
-
-
-    df_edges['Timestamp'] = df_edges['Timestamp'].apply(process_list)
-    # Convert the 'TotalSeconds' column to a PyTorch tensor
-    df_edges.to_csv("Timestamps.csv")
+    # Convert ISO8601 Difference Format to float in order to process via Torch
+    df_edges['Timestamp'] = df_edges['Timestamp'].apply(lambda lst: lst[1] * 86400 + lst[2])
     timestamps = torch.tensor(df_edges['Timestamp'].to_numpy(), dtype=torch.int64)
+    logging.info(f"Timestamp-Tensor: {timestamps}***")
 
-    logging.info(f"Timestamp-Tensor: {timestamps}***") # max 1740
-
-    y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy())
+    y = torch.LongTensor(df_edges['Is_Laundering'].to_numpy()) # Prediction Target.
 
     logging.info(f"Illicit ratio = {sum(y)} / {len(y)} = {sum(y) / len(y) * 100:.2f}%") # Share of fraud to none Fraud
     logging.info(f"Number of nodes (holdings doing transactions) = {df_nodes.shape[0]}")
     logging.info(f"Number of transactions = {df_edges.shape[0]}")
 
-
+    # encoder to transform categorical variables to numerical ones (in order to be able to process via numpy.
     label_encoder = LabelEncoder()
     df_edges['Payment_Format'] = label_encoder.fit_transform(df_edges['Payment_Format'])
     df_edges['Received_Currency'] = label_encoder.fit_transform(df_edges['Received_Currency'])
@@ -124,37 +107,39 @@ def get_data(args):
 
 
     x = torch.tensor(df_nodes.loc[:, node_features].to_numpy()).float()
-    edge_index = torch.LongTensor(df_edges.loc[:, ['from_id', 'to_id']].to_numpy().T)
+    edge_index = torch.LongTensor(df_edges.loc[:, ['from_id', 'to_id']].to_numpy().T) #TODO: I assume from_id / to_id should be indices not Node_IDs
+    logging.info(f"Edge index = {edge_index}")
     logging.info(f"features: {df_edges.loc[:, edge_features]}")
-
-    logging.info(f"Error Aua! {df_edges.loc[:, edge_features]}")
     edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
 
     logging.info(f"x: {x}")
     logging.info(f"edge_index: {edge_index}")
     logging.info(f"edge_attr: {edge_attr}")
-    # Data Converting
 
+    '''
+    This yields the following four tensors: 
+    1) y          ... Classification to be predicted
+    2) x          ... Node_ID and Feature of the node
+    3) edge_attr  ... Features of the edges
+    4) edge_index ... Indices of the edges (The two nodes that are connected via the edge 
+    '''
 
 
     logging.info(f"Edge attributes: {df_edges.loc[:, edge_features]}")
     logging.info(f"List of edge features: {edge_features}")
-    edge_attr = torch.tensor(df_edges.loc[:, edge_features].to_numpy()).float()
 
     n_days = int(timestamps.max() / (3600 * 24) + 1)
-
-    logging.info(f"Max Timestamps [sec.]: {timestamps.max()} ======  Max Timestamps [days]]: {int(timestamps.max() / (3600 * 24) + 1)} ")
-
 
     n_samples = y.shape[0]
     logging.info(f'number of days and transactions in the data: {n_days} days, {n_samples} transactions')
 
-    # data splitting
+    # data splitting: this is based on days - I oriented myself on the paper.
+
     daily_irs, weighted_daily_irs, daily_inds, daily_trans = [], [], [], []  # irs = illicit ratios, inds = indices, trans = transactions
     for day in range(n_days):
-        l = day * 24 * 3600
-        r = (day + 1) * 24 * 3600
-        day_inds = torch.where((timestamps >= l) & (timestamps < r))[0]
+        l = day * 24 * 3600 # lower day bound
+        r = (day + 1) * 24 * 3600 # upper day bound
+        day_inds = torch.where((timestamps >= l) & (timestamps < r))[0] # indices of the day that gets looped
         daily_irs.append(y[day_inds].float().mean())
         weighted_daily_irs.append(y[day_inds].float().mean() * day_inds.shape[0] / n_samples)
         daily_inds.append(day_inds)
@@ -166,11 +151,10 @@ def get_data(args):
     logging.info(f"Daily_totals: {daily_totals}")
     d_ts = daily_totals
 
-    I = list(range(len(d_ts))) # creates a list of indices
+    I = list(range(len(d_ts))) # creates a list of indices - Hence I in total access everything.
     logging.info(f"I: {I}")
     split_scores = dict()
 
-    # TODO: split_scores ist immer leer. Warum? 
     for i, j in itertools.combinations(I, 2):
         if j >= i:
             split_totals = [d_ts[:i].sum(), d_ts[i:j].sum(), d_ts[j:].sum()]
@@ -200,6 +184,12 @@ def get_data(args):
     val_inds = torch.cat(split_inds[1])
     te_inds = torch.cat(split_inds[2])
 
+    logging.info(f'------------------------------------------')
+    logging.info(f'Train inds: {tr_inds}')
+    logging.info(f'Val inds: {val_inds}')
+    logging.info(f'Test inds: {te_inds}')
+    logging.info(f'------------------------------------------')
+
     logging.info(f"Total train samples: {tr_inds.shape[0] / y.shape[0] * 100 :.2f}% || IR: "
                  f"{y[tr_inds].float().mean() * 100 :.2f}% || Train days: {split[0][:5]}")
     logging.info(f"Total val samples: {val_inds.shape[0] / y.shape[0] * 100 :.2f}% || IR: "
@@ -208,13 +198,12 @@ def get_data(args):
                  f"{y[te_inds].float().mean() * 100:.2f}% || Test days: {split[2][:5]}")
 
     # Creating the final data objects
-    tr_x, val_x, te_x = x, x, x
+    tr_x, val_x, te_x = x, x, x  # x is the Tensor with all the node features
     e_tr = tr_inds.numpy()
     e_val = np.concatenate([tr_inds, val_inds])
 
     tr_edge_index, tr_edge_attr, tr_y, tr_edge_times = edge_index[:, e_tr], edge_attr[e_tr], y[e_tr], timestamps[e_tr]
-    val_edge_index, val_edge_attr, val_y, val_edge_times = edge_index[:, e_val], edge_attr[e_val], y[e_val], timestamps[
-        e_val]
+    val_edge_index, val_edge_attr, val_y, val_edge_times = edge_index[:, e_val], edge_attr[e_val], y[e_val], timestamps[e_val]
     te_edge_index, te_edge_attr, te_y, te_edge_times = edge_index, edge_attr, y, timestamps
 
     tr_data = GraphData(x=tr_x, y=tr_y, edge_index=tr_edge_index, edge_attr=tr_edge_attr, timestamps=tr_edge_times)

@@ -1,3 +1,5 @@
+import logging
+
 import torch
 import tqdm
 from torch_geometric.transforms import BaseTransform
@@ -62,6 +64,13 @@ def add_arange_ids(data_list):
             data.edge_attr = torch.cat([torch.arange(data.edge_attr.shape[0]).view(-1, 1), data.edge_attr], dim=1)
 
 def get_loaders(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, transform, args):
+    logging.info("Hello? ")
+    logging.info(f"Val data {val_data}")
+    logging.info(f"Val inds {val_inds}") #TODO: Problem: val_inds contains indices that are not outside of the val data length
+
+    # Tr_data
+
+
     if isinstance(tr_data, HeteroData):
         tr_edge_label_index = tr_data['node', 'to', 'node'].edge_index
         tr_edge_label = tr_data['node', 'to', 'node'].y

@@ -1,0 +1,16 @@
+{"time":"2024-12-13T16:50:23.893005+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-13T16:50:23.893111+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241213_165023-smvknkyg/logs/debug-core.log"}
+{"time":"2024-12-13T16:50:24.056746+01:00","level":"INFO","msg":"created new stream","id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.057156+01:00","level":"INFO","msg":"stream: started","id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.057283+01:00","level":"INFO","msg":"handler: started","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.057421+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.057431+01:00","level":"INFO","msg":"sender: started","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.645296+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-13T16:50:24.906418+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-13T16:50:24.906654+01:00","level":"INFO","msg":"stream: closing","id":"smvknkyg"}
+{"time":"2024-12-13T16:50:24.910653+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-13T16:50:26.227965+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-13T16:50:26.579988+01:00","level":"INFO","msg":"handler: closed","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:26.581433+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:26.582277+01:00","level":"INFO","msg":"sender: closed","stream_id":"smvknkyg"}
+{"time":"2024-12-13T16:50:26.584889+01:00","level":"INFO","msg":"stream: closed","id":"smvknkyg"}

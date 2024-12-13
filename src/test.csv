@@ -1,7 +1,0 @@
-,from_id,to_id,Amount_Received,Payment_Format,Is_Laundering,Received_Currency,Timestamp,TotalSeconds
-0,0,0,3195403.0,1,0,0,P5DT8M,780.0
-0,0,0,22.97,1,0,0,PT7M,420.0
-0,0,0,592571.0,0,1,0,PT0S,0.0
-1,0,0,22.97,1,0,0,PT7M,420.0
-1,0,0,3195403.0,1,0,0,P5DT8M,780.0
-1,0,0,592571.0,0,1,0,PT0S,0.0

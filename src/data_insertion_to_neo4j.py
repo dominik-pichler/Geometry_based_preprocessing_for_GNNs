@@ -88,12 +88,7 @@ driver = GraphDatabase.driver(uri, auth=(user, password))
 
 def insert_and_connect_data(tx, row_data):
     query = (
-        """
-
-        // Delete everything in the database
-        MATCH (n)
-        DETACH DELETE n;
-        
+        """     
     //Create Transaction node
        // CREATE (t:Transaction {
          //   id: $id,  // Unique identifier for each transaction
@@ -111,7 +106,7 @@ def insert_and_connect_data(tx, row_data):
         MERGE (toBank:Bank {id: $To_Bank})
         MERGE (fromAccount:Account {id: $From_Account})
         MERGE (toAccount:Account {id: $To_Account})
-        >>
+        
         // Create relationships with additional context
         MERGE (fromBank)-[:BANK_OWNS_ACCOUNT]->(fromAccount)
         MERGE (toBank)-[:BANK_OWNS_ACCOUNT]->(toAccount)
