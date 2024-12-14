@@ -1,0 +1,16 @@
+{"time":"2024-12-14T09:57:40.564329+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-12-14T09:57:40.56444+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_095740-bwogvbre/logs/debug-core.log"}
+{"time":"2024-12-14T09:57:40.726498+01:00","level":"INFO","msg":"created new stream","id":"bwogvbre"}
+{"time":"2024-12-14T09:57:40.726713+01:00","level":"INFO","msg":"stream: started","id":"bwogvbre"}
+{"time":"2024-12-14T09:57:40.726852+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:40.726935+01:00","level":"INFO","msg":"handler: started","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:40.726967+01:00","level":"INFO","msg":"sender: started","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:41.199181+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T09:57:41.41784+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T09:57:41.418463+01:00","level":"INFO","msg":"stream: closing","id":"bwogvbre"}
+{"time":"2024-12-14T09:57:41.425123+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T09:57:42.542147+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T09:57:42.818756+01:00","level":"INFO","msg":"handler: closed","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:42.819645+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:42.81972+01:00","level":"INFO","msg":"sender: closed","stream_id":"bwogvbre"}
+{"time":"2024-12-14T09:57:42.821131+01:00","level":"INFO","msg":"stream: closed","id":"bwogvbre"}

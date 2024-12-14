@@ -22,78 +22,12 @@
 # TL;DR
 This repo contains thoughts and code on how to enhance GNNs Performance on Money Laundry Detection using Geometric Features. 
 
-# 1. System Architecture
+# 0. System Structure - Whats included
 1. Docker Container containing a graph database (Neo4j) for the KG/PG Storage and Logical Inference/Preprocessing
 2. An model training service (`src/main.py`)
 3. An inference service consisting of: 
    i.  Backend-Service (`TDB`)
    ii. A web-based UI (`TDB`)
-
-# 2. Run Inference
-
-
-# 3. Train Models
-1. Set up the DB Infrastructure via `docker-compose up -d`. 
-   You should now see the database UI at `http://localhost:7687/`
-2. Install all needed packages via `poetry install`.
-3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` directory.
-4. Spawn a new venv shell via `poetry shell`.
-5. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
-6. Run `src/main.py` with your desired configs to train models: 
-
-
-### Required Arguments
-`--model MODEL_NAME`: Specify the GNN architecture (Options: `gin`, `gat`, `rgcn`, `pna`)
-
-### Optional Arguments
-
-#### Model Adaptations
-`--GBPre`: Enable Geometry based Preprocessing (default: True)
-
-`--emlps`: Enable EMLP layers in GNN training
-
-`--reverse_mp`: Enable reverse message passing in GNN training
-
-`--ports`: Include port numbering features
-
-`--tds`: Include time delta features (time between transactions)
-
-`--ego`: Include ego ID features
-
-#### Training Parameters
-`--batch_size`: Training batch size (default: 8192)
-
-`--n_epochs`: Number of training epochs (default: 100)
-
-`--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
-
-#### Data and Model Settings
-`--seed`: Random seed for reproducibility (default: 1)
-
-`--tqdm`: Enable progress bar for interactive terminal use
-
-`--testing`: Run in testing mode without wandb logging
-
-`--save_model`: Save the best performing model
-
-`--unique_name`: Specify unique identifier for model storage
-
-`--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
-
-`--inference`: Run inference only (requires --unique_name pointing to trained model)
-
-
-### Example Usage:
-```bash
-# Train a GAT model with default parameters
-python main.py --model gat
-
-# Train a GIN model with custom settings
-python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
-
-# Fine-tune a pre-trained PNA model
-python main.py --model pna --finetune --unique_name pretrained_model_name```
-```
 
 
 # 1. Introduction
@@ -318,35 +252,71 @@ The combined approach of geometry-based preprocessing (GBPre) and GNNs can be fo
 
 
 --- 
-# Appendix (A):  Project plan
-## A.1 Dataset Collection and Preprocessing
-- **~Research and Identify Suitable Datasets~**: 10 hours
-- **~Data Cleaning and Preprocessing~**: 20 hours
-- **Feature Engineering**: 10 hours
 
-## A.2 Designing and Building the Graph Neural Network
-- **~Literature Review on Graph Neural Networks~**: 10 hours
-- **~Network Architecture Design~**: 15 hours
-- **~Implementation of the Network~**: 20 hours
-
-## A.3 Training and Fine-Tuning the Network
-- **Build Data Pipeline**
-- **Initial Model Training**: 20 hours
-- **Hyperparameter Tuning**: 15 hours
-- **Validation and Testing**: 15 hours
-
-## A.4 Building an Application to Present Results
-- **~Design User Interface~**: 10 hours
-- **Develop Application Backend**: 15 hours
-- **Integrate Model with Application**: 10 hours
-
-## A.5 Writing the Final Report
-- **Drafting the Report Structure**: 5 hours
-- **Writing and Editing Content**: 15 hours
-- **Creating Visualizations and Appendices**: 5 hours
-
-## A.6 Preparing the Presentation
-- **Design Presentation Slides**: 5 hours
-- **Rehearse Presentation Delivery**: 5 hours
+# How to run Inference
 
 
+# How to train Models
+1. Set up the DB Infrastructure via `docker-compose up -d`. 
+   You should now see the database UI at `http://localhost:7687/`
+2. Install all needed packages via `poetry install`.
+3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` directory.
+4. Spawn a new venv shell via `poetry shell`.
+5. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
+   In order to be able to test the model training on small scale computational ressoruces (e.g. the local computer) flags for this have been introduced: 
+   ``python your_script.py --rows_to_insert 10000 --local_test``
+6. Run `src/main.py` with your desired configs to train models: 
+
+
+### Required Arguments
+`--model MODEL_NAME`: Specify the GNN architecture (Options: `gin`, `gat`, `rgcn`, `pna`)
+
+### Optional Arguments
+
+#### Model Adaptations
+`--GBPre`: Enable Geometry based Preprocessing (default: True)
+
+`--emlps`: Enable EMLP layers in GNN training
+
+`--reverse_mp`: Enable reverse message passing in GNN training
+
+`--ports`: Include port numbering features
+
+`--tds`: Include time delta features (time between transactions)
+
+`--ego`: Include ego ID features
+
+#### Training Parameters
+`--batch_size`: Training batch size (default: 8192)
+
+`--n_epochs`: Number of training epochs (default: 100)
+
+`--num_neighs`: Number of neighbors to sample per hop, in descending order (default: [100,100])
+
+#### Data and Model Settings
+`--seed`: Random seed for reproducibility (default: 1)
+
+`--tqdm`: Enable progress bar for interactive terminal use
+
+`--testing`: Run in testing mode without wandb logging
+
+`--save_model`: Save the best performing model
+
+`--unique_name`: Specify unique identifier for model storage
+
+`--finetune`: Enable model fine-tuning (requires --unique_name pointing to pre-trained model)
+
+`--inference`: Run inference only (requires --unique_name pointing to trained model)
+
+
+### Example Usage:
+```bash
+# Train a GAT model with default parameters
+python main.py --model gat
+
+# Train a GIN model with custom settings
+python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
+
+# Fine-tune a pre-trained PNA model
+python main.py --model pna --finetune --unique_name pretrained_model_name```
+```

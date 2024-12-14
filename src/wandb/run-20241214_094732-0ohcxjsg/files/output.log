@@ -1,0 +1,15 @@
+2024-12-14 09:47:33,676 [INFO ] Hello?
+2024-12-14 09:47:33,676 [INFO ] Val data GraphData(x=[8037, 1], edge_index=[2, 8075], edge_attr=[8075, 5], y=[8075], readout='edge', loss_fn='ce', num_nodes=8037, timestamps=[8075])
+2024-12-14 09:47:33,677 [INFO ] Val inds tensor([    1,     9,    18,  ...,  9997,  9999, 10044])
+Traceback (most recent call last):
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 41, in <module>
+    main()
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 34, in main
+    train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 204, in train_gnn
+    tr_loader, val_loader, te_loader = get_loaders(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, transform, args)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/train_util.py", line 100, in get_loaders
+    val_loader = LinkNeighborLoader(val_data,num_neighbors=args.num_neighs, edge_label_index=val_data.edge_index[:, val_inds],
+                                                                                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+IndexError: index 8104 is out of bounds for dimension 0 with size 8075

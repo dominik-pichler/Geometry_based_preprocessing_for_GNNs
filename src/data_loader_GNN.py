@@ -71,6 +71,8 @@ def get_data(args):
 
 # Datatype Conversion
     df_edges['Timestamp'] = (df_edges['Timestamp'] - df_edges['Timestamp'].min()) # Normailization to turn dates into floats
+    df_edges = df_edges.sort_values(by='Timestamp', ascending=True)
+
     df_edges['from_id'] = df_edges['from_id'].astype(str)
     df_edges['to_id'] = df_edges['to_id'].astype(str)
     le = LabelEncoder(); df_edges['from_id'] = le.fit_transform(df_edges['from_id']);df_edges['to_id'] = le.fit_transform(df_edges['to_id'])
@@ -177,8 +179,7 @@ def get_data(args):
     split_inds = {k: [] for k in range(3)}
     for i in range(3):
         for day in split[i]:
-            split_inds[i].append(daily_inds[
-                                     day])  # split_inds contains a list for each split (tr,val,te) which contains the indices of each day seperately
+            split_inds[i].append(daily_inds[day])  # split_inds contains a list for each split (tr,val,te) which contains the indices of each day seperately
 
     tr_inds = torch.cat(split_inds[0])
     val_inds = torch.cat(split_inds[1])
