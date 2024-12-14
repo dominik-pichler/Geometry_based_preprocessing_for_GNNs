@@ -1,0 +1,23 @@
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_setup.py:_flush():68] Current SDK version is 0.19.1
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_setup.py:_flush():68] Configure stats pid to 31816
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_setup.py:_flush():68] Loading settings from /Users/dominikpichler/.config/wandb/settings
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_setup.py:_flush():68] Loading settings from /Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/settings
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_setup.py:_flush():68] Loading settings from environment variables
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:_log_setup():528] Logging user logs to /Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_115053-gwasqsm6/logs/debug.log
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:_log_setup():529] Logging internal logs to /Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_115053-gwasqsm6/logs/debug-internal.log
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:init():644] calling init triggers
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:init():650] wandb.init called with sweep_config: {}
+config: {'epochs': 100, 'batch_size': 8192, 'model': 'git', 'data': None, 'num_neighbors': [100, 100], 'lr': None, 'n_hidden': None, 'n_gnn_layers': None, 'loss': 'ce', 'w_ce1': None, 'w_ce2': None, 'dropout': None, 'final_dropout': None, 'n_heads': None}
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:init():680] starting backend
+2024-12-14 11:50:53,326 INFO    MainThread:31816 [wandb_init.py:init():684] sending inform_init request
+2024-12-14 11:50:53,377 INFO    MainThread:31816 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-12-14 11:50:53,377 INFO    MainThread:31816 [wandb_init.py:init():697] backend started and connected
+2024-12-14 11:50:53,384 INFO    MainThread:31816 [wandb_init.py:init():790] updated telemetry
+2024-12-14 11:50:53,435 INFO    MainThread:31816 [wandb_init.py:init():822] communicating run to backend with 90.0 second timeout
+2024-12-14 11:50:53,931 INFO    MainThread:31816 [wandb_init.py:init():874] starting run threads in backend
+2024-12-14 11:50:54,097 INFO    MainThread:31816 [wandb_run.py:_console_start():2374] atexit reg
+2024-12-14 11:50:54,097 INFO    MainThread:31816 [wandb_run.py:_redirect():2224] redirect: wrap_raw
+2024-12-14 11:50:54,097 INFO    MainThread:31816 [wandb_run.py:_redirect():2289] Wrapping output streams.
+2024-12-14 11:50:54,098 INFO    MainThread:31816 [wandb_run.py:_redirect():2314] Redirects installed.
+2024-12-14 11:50:54,101 INFO    MainThread:31816 [wandb_init.py:init():916] run started, returning control to user process
+2024-12-14 11:50:54,159 WARNING MsgRouterThr:31816 [router.py:message_loop():75] message_loop has been closed

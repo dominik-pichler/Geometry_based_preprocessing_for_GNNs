@@ -1,0 +1,13 @@
+2024-12-14 11:50:54,105 [INFO ] Hello?
+2024-12-14 11:50:54,106 [INFO ] Val data GraphData(x=[8037, 1], edge_index=[2, 8075], edge_attr=[8075, 5], y=[8075], readout='edge', loss_fn='ce', num_nodes=8037, timestamps=[8075])
+2024-12-14 11:50:54,106 [INFO ] Val inds tensor([6020, 6021, 6022,  ..., 8072, 8073, 8074])
+Traceback (most recent call last):
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 41, in <module>
+    main()
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 34, in main
+    train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 208, in train_gnn
+    model = get_model(sample_batch, config, args)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 164, in get_model
+    return model
+UnboundLocalError: local variable 'model' referenced before assignment

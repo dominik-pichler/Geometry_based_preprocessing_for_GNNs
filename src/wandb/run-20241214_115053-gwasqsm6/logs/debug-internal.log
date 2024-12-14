@@ -1,0 +1,16 @@
+{"time":"2024-12-14T11:50:53.401696+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T11:50:53.401769+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_115053-gwasqsm6/logs/debug-core.log"}
+{"time":"2024-12-14T11:50:53.545938+01:00","level":"INFO","msg":"created new stream","id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:53.546551+01:00","level":"INFO","msg":"stream: started","id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:53.546828+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:53.546908+01:00","level":"INFO","msg":"handler: started","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:53.546827+01:00","level":"INFO","msg":"sender: started","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:53.951143+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T11:50:54.156423+01:00","level":"INFO","msg":"stream: closing","id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:54.157257+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T11:50:54.168202+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T11:50:55.233217+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T11:50:55.472929+01:00","level":"INFO","msg":"handler: closed","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:55.473481+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:55.473535+01:00","level":"INFO","msg":"sender: closed","stream_id":"gwasqsm6"}
+{"time":"2024-12-14T11:50:55.474772+01:00","level":"INFO","msg":"stream: closed","id":"gwasqsm6"}

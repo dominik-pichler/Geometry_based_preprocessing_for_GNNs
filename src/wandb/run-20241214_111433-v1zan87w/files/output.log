@@ -1,0 +1,25 @@
+2024-12-14 11:14:34,622 [INFO ] Hello?
+2024-12-14 11:14:34,623 [INFO ] Val data GraphData(x=[8037, 1], edge_index=[2, 8075], edge_attr=[8075, 5], y=[8075], readout='edge', loss_fn='ce', num_nodes=8037, timestamps=[8075])
+2024-12-14 11:14:34,624 [INFO ] Val inds tensor([6020, 6021, 6022,  ..., 8072, 8073, 8074])
+Traceback (most recent call last):
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 41, in <module>
+    main()
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 34, in main
+    train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 207, in train_gnn
+    sample_batch = next(iter(tr_loader))
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    data = self._next_data()
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 675, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    return self.collate_fn(data)
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch_geometric/loader/link_loader.py", line 211, in collate_fn
+    out = self.link_sampler.sample_from_edges(
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch_geometric/sampler/neighbor_sampler.py", line 334, in sample_from_edges
+    out = edge_sample(inputs, self._sample, self.num_nodes, self.disjoint,
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch_geometric/sampler/neighbor_sampler.py", line 740, in edge_sample
+    out = sample_fn(seed, seed_time)
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch_geometric/sampler/neighbor_sampler.py", line 508, in _sample
+    raise ImportError(f"'{self.__class__.__name__}' requires "
+ImportError: 'NeighborSampler' requires either 'pyg-lib' or 'torch-sparse'

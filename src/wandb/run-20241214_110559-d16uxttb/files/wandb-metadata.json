@@ -1,0 +1,20 @@
+{
+  "os":  "macOS-13.3.1-x86_64-i386-64bit",
+  "python":  "CPython 3.9.21",
+  "startedAt":  "2024-12-14T10:05:59.653184Z",
+  "args":  [
+    "--model",
+    "gat"
+  ],
+  "program":  "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py",
+  "codePath":  "src/main.py",
+  "git":  {
+    "remote":  "https://github.com/dominik-pichler/Dont_steal_my_taxes.git",
+    "commit":  "e271438516a1018899a272b1183411c7e999daa1"
+  },
+  "email":  "info@dominik-pichler.com",
+  "root":  "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src",
+  "host":  "Dominiks-MacBook-Pro-2.local",
+  "executable":  "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/bin/python3",
+  "codePathLocal":  "main.py"
+}

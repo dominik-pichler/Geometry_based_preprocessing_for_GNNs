@@ -1,0 +1,17 @@
+{"time":"2024-12-14T11:48:41.99402+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T11:48:41.994114+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_114841-zm7o5b7x/logs/debug-core.log"}
+{"time":"2024-12-14T11:48:42.136676+01:00","level":"INFO","msg":"created new stream","id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:42.137286+01:00","level":"INFO","msg":"stream: started","id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:42.13747+01:00","level":"INFO","msg":"handler: started","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:42.137445+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:42.13748+01:00","level":"INFO","msg":"sender: started","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:42.51998+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T11:48:53.785962+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T11:48:53.791027+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T11:48:54.461976+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T11:48:54.776111+01:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2024-12-14T11:48:55.799153+01:00","level":"INFO","msg":"stream: closing","id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:55.799423+01:00","level":"INFO","msg":"handler: closed","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:55.799845+01:00","level":"INFO","msg":"sender: closed","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:55.79981+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"zm7o5b7x"}
+{"time":"2024-12-14T11:48:55.801122+01:00","level":"INFO","msg":"stream: closed","id":"zm7o5b7x"}
