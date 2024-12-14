@@ -1,0 +1,51 @@
+{
+  "os":  "macOS-13.3.1-x86_64-i386-64bit",
+  "python":  "CPython 3.9.21",
+  "startedAt":  "2024-12-14T19:54:35.923861Z",
+  "args":  [
+    "--model",
+    "rgcn",
+    "--save_model",
+    "--unique_name",
+    "no_GBPre_RCGN"
+  ],
+  "program":  "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py",
+  "codePath":  "src/main.py",
+  "git":  {
+    "remote":  "https://github.com/dominik-pichler/Dont_steal_my_taxes.git",
+    "commit":  "c9a5ec7316ae7e46af2243d49608ba02ce71c60f"
+  },
+  "email":  "info@dominik-pichler.com",
+  "root":  "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src",
+  "host":  "Dominiks-MacBook-Pro-2.local",
+  "executable":  "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/bin/python",
+  "codePathLocal":  "main.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  8,
+  "disk":  {
+    "/":  {
+      "total":  "494384795648",
+      "used":  "439148019712"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "494384795648",
+      "used":  "439148019712"
+    }
+  },
+  "memory":  {
+    "total":  "17179869184"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  8
+  },
+  "apple":  {
+    "name":  "Unknown",
+    "ecpuCores":  2,
+    "pcpuCores":  6,
+    "gpuCores":  14,
+    "memoryGb":  16,
+    "swapTotalBytes":  "19327352832",
+    "ramTotalBytes":  "17179869184"
+  }
+}

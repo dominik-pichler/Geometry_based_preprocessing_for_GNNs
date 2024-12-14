@@ -1,0 +1,110 @@
+2024-12-14 20:58:19,859 [INFO ] Hello?
+2024-12-14 20:58:19,859 [INFO ] Val data GraphData(x=[8037, 1], edge_index=[2, 8075], edge_attr=[8075, 5], y=[8075], readout='edge', loss_fn='ce', num_nodes=8037, timestamps=[8075])
+2024-12-14 20:58:19,861 [INFO ] Val inds tensor([6020, 6021, 6022,  ..., 8072, 8073, 8074])
+2024-12-14 20:58:20,027 [INFO ] +---------------------------------+-----------------------------------+----------------+----------+
+| Layer                           | Input Shape                       | Output Shape   | #Param   |
+|---------------------------------+-----------------------------------+----------------+----------|
+| GATe                            | [5878, 1], [2, 5183], [5183, 4]   | [5183, 2]      | 28,577   |
+| ├─(node_emb)Linear              | [5878, 1]                         | [5878, 64]     | 128      |
+| ├─(edge_emb)Linear              | [5183, 4]                         | [5183, 64]     | 320      |
+| ├─(convs)ModuleList             | --                                | --             | 16,896   |
+| │    └─(0)GATConv               | [5878, 64], [2, 5183], [5183, 64] | [5878, 64]     | 8,448    |
+| │    └─(1)GATConv               | [5878, 64], [2, 5183], [5183, 64] | [5878, 64]     | 8,448    |
+| ├─(emlps)ModuleList             | --                                | --             | --       |
+| ├─(batch_norms)ModuleList       | --                                | --             | 256      |
+| │    └─(0)BatchNorm             | [5878, 64]                        | [5878, 64]     | 128      |
+| │    │    └─(module)BatchNorm1d | [5878, 64]                        | [5878, 64]     | 128      |
+| │    └─(1)BatchNorm             | [5878, 64]                        | [5878, 64]     | 128      |
+| │    │    └─(module)BatchNorm1d | [5878, 64]                        | [5878, 64]     | 128      |
+| ├─(mlp)Sequential               | [5183, 192]                       | [5183, 2]      | 10,977   |
+| │    └─(0)Linear                | [5183, 192]                       | [5183, 50]     | 9,650    |
+| │    └─(1)ReLU                  | [5183, 50]                        | [5183, 50]     | --       |
+| │    └─(2)Dropout               | [5183, 50]                        | [5183, 50]     | --       |
+| │    └─(3)Linear                | [5183, 50]                        | [5183, 25]     | 1,275    |
+| │    └─(4)ReLU                  | [5183, 25]                        | [5183, 25]     | --       |
+| │    └─(5)Dropout               | [5183, 25]                        | [5183, 25]     | --       |
+| │    └─(6)Linear                | [5183, 25]                        | [5183, 2]      | 52       |
++---------------------------------+-----------------------------------+----------------+----------+
+2024-12-14 20:58:20,261 [INFO ] Train F1: 0.0419
+2024-12-14 20:58:20,330 [INFO ] Validation F1: 0.4047
+2024-12-14 20:58:20,330 [INFO ] Test F1: 0.4115
+2024-12-14 20:58:20,441 [INFO ] Train F1: 0.4059
+2024-12-14 20:58:20,497 [INFO ] Validation F1: 0.4509
+2024-12-14 20:58:20,497 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:20,602 [INFO ] Train F1: 0.4673
+2024-12-14 20:58:20,651 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:20,651 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:20,778 [INFO ] Train F1: 0.4674
+2024-12-14 20:58:20,841 [INFO ] Validation F1: 0.4510
+2024-12-14 20:58:20,841 [INFO ] Test F1: 0.4544
+2024-12-14 20:58:20,947 [INFO ] Train F1: 0.4676
+2024-12-14 20:58:21,000 [INFO ] Validation F1: 0.4493
+2024-12-14 20:58:21,000 [INFO ] Test F1: 0.4559
+2024-12-14 20:58:21,122 [INFO ] Train F1: 0.4662
+2024-12-14 20:58:21,168 [INFO ] Validation F1: 0.4471
+2024-12-14 20:58:21,168 [INFO ] Test F1: 0.4560
+2024-12-14 20:58:21,297 [INFO ] Train F1: 0.4681
+2024-12-14 20:58:21,343 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:21,343 [INFO ] Test F1: 0.4545
+2024-12-14 20:58:21,443 [INFO ] Train F1: 0.4667
+2024-12-14 20:58:21,491 [INFO ] Validation F1: 0.4512
+2024-12-14 20:58:21,491 [INFO ] Test F1: 0.4553
+2024-12-14 20:58:21,583 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:21,654 [INFO ] Validation F1: 0.4512
+2024-12-14 20:58:21,655 [INFO ] Test F1: 0.4551
+2024-12-14 20:58:21,756 [INFO ] Train F1: 0.4676
+2024-12-14 20:58:21,818 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:21,818 [INFO ] Test F1: 0.4551
+2024-12-14 20:58:21,919 [INFO ] Train F1: 0.4673
+2024-12-14 20:58:21,971 [INFO ] Validation F1: 0.4502
+2024-12-14 20:58:21,972 [INFO ] Test F1: 0.4544
+2024-12-14 20:58:22,089 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:22,134 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:22,135 [INFO ] Test F1: 0.4550
+2024-12-14 20:58:22,238 [INFO ] Train F1: 0.4673
+2024-12-14 20:58:22,285 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:22,285 [INFO ] Test F1: 0.4551
+2024-12-14 20:58:22,371 [INFO ] Train F1: 0.4673
+2024-12-14 20:58:22,415 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:22,415 [INFO ] Test F1: 0.4551
+2024-12-14 20:58:22,528 [INFO ] Train F1: 0.4673
+2024-12-14 20:58:22,590 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:22,590 [INFO ] Test F1: 0.4550
+2024-12-14 20:58:22,720 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:22,892 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:22,892 [INFO ] Test F1: 0.4550
+2024-12-14 20:58:22,991 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:23,040 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:23,040 [INFO ] Test F1: 0.4550
+2024-12-14 20:58:23,169 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:23,278 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:23,278 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:23,421 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:23,470 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:23,471 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:23,645 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:23,729 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:23,729 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:23,842 [INFO ] Train F1: 0.4674
+2024-12-14 20:58:23,911 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:23,911 [INFO ] Test F1: 0.4548
+2024-12-14 20:58:24,305 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:24,719 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:24,721 [INFO ] Test F1: 0.4550
+2024-12-14 20:58:25,321 [INFO ] Train F1: 0.4675
+2024-12-14 20:58:25,487 [INFO ] Validation F1: 0.4508
+2024-12-14 20:58:25,487 [INFO ] Test F1: 0.4548
+Traceback (most recent call last):
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 41, in <module>
+    main()
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 34, in main
+    train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 236, in train_gnn
+    model = train_homo(tr_loader, val_loader, te_loader, tr_inds, val_inds, te_inds, model, optimizer, loss_fn, args, config, device, val_data, te_data, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 38, in train_homo
+    loss.backward()
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt

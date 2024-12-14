@@ -1,0 +1,16 @@
+{"time":"2024-12-14T20:00:58.284583+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T20:00:58.284646+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_200058-ds59nzbk/logs/debug-core.log"}
+{"time":"2024-12-14T20:00:58.43283+01:00","level":"INFO","msg":"created new stream","id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:58.433364+01:00","level":"INFO","msg":"stream: started","id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:58.433538+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:58.433564+01:00","level":"INFO","msg":"sender: started","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:58.433618+01:00","level":"INFO","msg":"handler: started","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:58.878327+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T20:00:59.699672+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T20:00:59.70001+01:00","level":"INFO","msg":"stream: closing","id":"ds59nzbk"}
+{"time":"2024-12-14T20:00:59.704602+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T20:01:00.431381+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T20:01:00.681238+01:00","level":"INFO","msg":"handler: closed","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:01:00.681438+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:01:00.681704+01:00","level":"INFO","msg":"sender: closed","stream_id":"ds59nzbk"}
+{"time":"2024-12-14T20:01:00.682607+01:00","level":"INFO","msg":"stream: closed","id":"ds59nzbk"}

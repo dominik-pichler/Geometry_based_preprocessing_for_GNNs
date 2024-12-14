@@ -1,0 +1,17 @@
+{"time":"2024-12-14T20:59:16.236845+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T20:59:16.236898+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_205916-35awmvib/logs/debug-core.log"}
+{"time":"2024-12-14T20:59:16.379104+01:00","level":"INFO","msg":"created new stream","id":"35awmvib"}
+{"time":"2024-12-14T20:59:16.379323+01:00","level":"INFO","msg":"stream: started","id":"35awmvib"}
+{"time":"2024-12-14T20:59:16.379382+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:16.379454+01:00","level":"INFO","msg":"sender: started","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:16.37953+01:00","level":"INFO","msg":"handler: started","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:16.711691+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T20:59:54.735357+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T20:59:54.756994+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T20:59:55.699823+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T20:59:55.741268+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 151-199, summary, console lines 481-626","runtime_seconds":0.040789}],"total_operations":1}}
+{"time":"2024-12-14T20:59:57.135252+01:00","level":"INFO","msg":"stream: closing","id":"35awmvib"}
+{"time":"2024-12-14T20:59:57.135516+01:00","level":"INFO","msg":"handler: closed","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:57.135942+01:00","level":"INFO","msg":"sender: closed","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:57.135806+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"35awmvib"}
+{"time":"2024-12-14T20:59:57.136907+01:00","level":"INFO","msg":"stream: closed","id":"35awmvib"}

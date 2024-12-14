@@ -1,0 +1,17 @@
+{"time":"2024-12-14T20:02:02.521166+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T20:02:02.521288+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_200202-stuy25cm/logs/debug-core.log"}
+{"time":"2024-12-14T20:02:02.681789+01:00","level":"INFO","msg":"created new stream","id":"stuy25cm"}
+{"time":"2024-12-14T20:02:02.682398+01:00","level":"INFO","msg":"stream: started","id":"stuy25cm"}
+{"time":"2024-12-14T20:02:02.682627+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:02.682768+01:00","level":"INFO","msg":"sender: started","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:02.683098+01:00","level":"INFO","msg":"handler: started","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:03.068803+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T20:02:34.131189+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T20:02:34.136241+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T20:02:35.018167+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T20:02:35.132857+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 192-199, summary, console lines 614-634","runtime_seconds":0.112515041}],"total_operations":1}}
+{"time":"2024-12-14T20:02:36.424967+01:00","level":"INFO","msg":"stream: closing","id":"stuy25cm"}
+{"time":"2024-12-14T20:02:36.425267+01:00","level":"INFO","msg":"handler: closed","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:36.430023+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:36.433478+01:00","level":"INFO","msg":"sender: closed","stream_id":"stuy25cm"}
+{"time":"2024-12-14T20:02:36.442659+01:00","level":"INFO","msg":"stream: closed","id":"stuy25cm"}

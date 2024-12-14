@@ -1,0 +1,17 @@
+{"time":"2024-12-14T21:01:02.974631+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T21:01:02.974688+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_210102-u7gebyui/logs/debug-core.log"}
+{"time":"2024-12-14T21:01:03.128515+01:00","level":"INFO","msg":"created new stream","id":"u7gebyui"}
+{"time":"2024-12-14T21:01:03.128749+01:00","level":"INFO","msg":"stream: started","id":"u7gebyui"}
+{"time":"2024-12-14T21:01:03.128751+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:01:03.128789+01:00","level":"INFO","msg":"handler: started","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:01:03.129045+01:00","level":"INFO","msg":"sender: started","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:01:03.457277+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T21:02:25.408532+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T21:02:25.413306+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T21:02:26.408994+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T21:02:26.414122+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 182-199, summary, console lines 576-626","runtime_seconds":0.00343875}],"total_operations":1}}
+{"time":"2024-12-14T21:02:27.667577+01:00","level":"INFO","msg":"stream: closing","id":"u7gebyui"}
+{"time":"2024-12-14T21:02:27.668106+01:00","level":"INFO","msg":"handler: closed","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:02:27.668682+01:00","level":"INFO","msg":"sender: closed","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:02:27.668378+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"u7gebyui"}
+{"time":"2024-12-14T21:02:27.670082+01:00","level":"INFO","msg":"stream: closed","id":"u7gebyui"}

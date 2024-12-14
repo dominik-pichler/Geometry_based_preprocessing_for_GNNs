@@ -1,6 +1,6 @@
 {
     "paths": {
-      "model_to_load": "/model/",
-      "model_to_save": "/model/"
+      "model_to_load": "models/",
+      "model_to_save": "models/"
     }
   }

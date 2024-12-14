@@ -1,0 +1,17 @@
+{"time":"2024-12-14T19:47:51.263383+01:00","level":"INFO","msg":"using version","core version":"0.19.1"}
+{"time":"2024-12-14T19:47:51.26346+01:00","level":"INFO","msg":"created symlink","path":"/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/wandb/run-20241214_194751-3ktsdv2r/logs/debug-core.log"}
+{"time":"2024-12-14T19:47:51.414033+01:00","level":"INFO","msg":"created new stream","id":"3ktsdv2r"}
+{"time":"2024-12-14T19:47:51.41466+01:00","level":"INFO","msg":"stream: started","id":"3ktsdv2r"}
+{"time":"2024-12-14T19:47:51.414816+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:47:51.414897+01:00","level":"INFO","msg":"handler: started","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:47:51.415054+01:00","level":"INFO","msg":"sender: started","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:47:51.786519+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-12-14T19:48:24.496539+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-12-14T19:48:24.501638+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-12-14T19:48:25.520061+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.641154,"progress":"33.1KB/33.1KB"}],"total_operations":1}}
+{"time":"2024-12-14T19:48:25.659396+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-12-14T19:48:26.966915+01:00","level":"INFO","msg":"stream: closing","id":"3ktsdv2r"}
+{"time":"2024-12-14T19:48:26.967092+01:00","level":"INFO","msg":"handler: closed","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:48:26.967562+01:00","level":"INFO","msg":"sender: closed","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:48:26.967506+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"3ktsdv2r"}
+{"time":"2024-12-14T19:48:26.969536+01:00","level":"INFO","msg":"stream: closed","id":"3ktsdv2r"}

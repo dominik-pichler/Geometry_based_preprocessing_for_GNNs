@@ -1,0 +1,59 @@
+2024-12-14 20:00:59,019 [INFO ] Hello?
+2024-12-14 20:00:59,020 [INFO ] Val data GraphData(x=[8037, 1], edge_index=[2, 8075], edge_attr=[8075, 7], y=[8075], readout='edge', loss_fn='ce', num_nodes=8037, timestamps=[8075])
+2024-12-14 20:00:59,022 [INFO ] Val inds tensor([6020, 6021, 6022,  ..., 8072, 8073, 8074])
+2024-12-14 20:00:59,175 [INFO ] +---------------------------------+-----------------------------------+----------------+----------+
+| Layer                           | Input Shape                       | Output Shape   | #Param   |
+|---------------------------------+-----------------------------------+----------------+----------|
+| GINe                            | [5878, 1], [2, 5183], [5183, 6]   | [5183, 2]      | 73,779   |
+| ├─(node_emb)Linear              | [5878, 1]                         | [5878, 66]     | 132      |
+| ├─(edge_emb)Linear              | [5183, 6]                         | [5183, 66]     | 462      |
+| ├─(convs)ModuleList             | --                                | --             | 26,532   |
+| │    └─(0)GINEConv              | [5878, 66], [2, 5183], [5183, 66] | [5878, 66]     | 13,266   |
+| │    └─(1)GINEConv              | [5878, 66], [2, 5183], [5183, 66] | [5878, 66]     | 13,266   |
+| ├─(emlps)ModuleList             | --                                | --             | 35,112   |
+| │    └─(0)Sequential            | [5183, 198]                       | [5183, 66]     | 17,556   |
+| │    │    └─(0)Linear           | [5183, 198]                       | [5183, 66]     | 13,134   |
+| │    │    └─(1)ReLU             | [5183, 66]                        | [5183, 66]     | --       |
+| │    │    └─(2)Linear           | [5183, 66]                        | [5183, 66]     | 4,422    |
+| │    └─(1)Sequential            | [5183, 198]                       | [5183, 66]     | 17,556   |
+| │    │    └─(0)Linear           | [5183, 198]                       | [5183, 66]     | 13,134   |
+| │    │    └─(1)ReLU             | [5183, 66]                        | [5183, 66]     | --       |
+| │    │    └─(2)Linear           | [5183, 66]                        | [5183, 66]     | 4,422    |
+| ├─(batch_norms)ModuleList       | --                                | --             | 264      |
+| │    └─(0)BatchNorm             | [5878, 66]                        | [5878, 66]     | 132      |
+| │    │    └─(module)BatchNorm1d | [5878, 66]                        | [5878, 66]     | 132      |
+| │    └─(1)BatchNorm             | [5878, 66]                        | [5878, 66]     | 132      |
+| │    │    └─(module)BatchNorm1d | [5878, 66]                        | [5878, 66]     | 132      |
+| ├─(mlp)Sequential               | [5183, 198]                       | [5183, 2]      | 11,277   |
+| │    └─(0)Linear                | [5183, 198]                       | [5183, 50]     | 9,950    |
+| │    └─(1)ReLU                  | [5183, 50]                        | [5183, 50]     | --       |
+| │    └─(2)Dropout               | [5183, 50]                        | [5183, 50]     | --       |
+| │    └─(3)Linear                | [5183, 50]                        | [5183, 25]     | 1,275    |
+| │    └─(4)ReLU                  | [5183, 25]                        | [5183, 25]     | --       |
+| │    └─(5)Dropout               | [5183, 25]                        | [5183, 25]     | --       |
+| │    └─(6)Linear                | [5183, 25]                        | [5183, 2]      | 52       |
++---------------------------------+-----------------------------------+----------------+----------+
+2024-12-14 20:00:59,432 [INFO ] Train F1: 0.3511
+2024-12-14 20:00:59,475 [INFO ] Validation F1: 0.4508
+2024-12-14 20:00:59,475 [INFO ] Test F1: 0.4550
+2024-12-14 20:00:59,586 [INFO ] Train F1: 0.4675
+2024-12-14 20:00:59,645 [INFO ] Validation F1: 0.4508
+2024-12-14 20:00:59,645 [INFO ] Test F1: 0.4548
+Traceback (most recent call last):
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 41, in <module>
+    main()
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/main.py", line 34, in main
+    train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 235, in train_gnn
+    model = train_homo(tr_loader, val_loader, te_loader, tr_inds, val_inds, te_inds, model, optimizer, loss_fn, args, config, device, val_data, te_data, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/training.py", line 65, in train_homo
+    save_model(model, optimizer, epoch, args, data_config)
+  File "/Users/dominikpichler/Documents/Git/Uni/Dont_steal_my_taxes/src/train_util.py", line 203, in save_model
+    torch.save({
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/serialization.py", line 628, in save
+    with _open_zipfile_writer(f) as opened_zipfile:
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/serialization.py", line 502, in _open_zipfile_writer
+    return container(name_or_buffer)
+  File "/Users/dominikpichler/Library/Caches/pypoetry/virtualenvs/dont-steal-my-taxes-NKkxdETi-py3.9/lib/python3.9/site-packages/torch/serialization.py", line 473, in __init__
+    super().__init__(torch._C.PyTorchFileWriter(self.name))
+RuntimeError: Parent directory /model/ does not exist.
