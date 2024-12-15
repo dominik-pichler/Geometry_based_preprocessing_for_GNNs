@@ -20,7 +20,7 @@
      (___|__)
 ```
 # TL;DR
-This repo contains thoughts and code on how to enhance GNNs Performance on Money Laundry Detection using Geometric Features. 
+This repo contains thoughts and code on how to enhance GNNs Performance on Money Laundry Detection using Geometric Based Feature-Extraction. 
 
 # 0. System Structure - Whats included
 1. Docker Container containing a graph database (Neo4j) for the KG/PG Storage and Logical Inference/Preprocessing
@@ -31,8 +31,8 @@ This repo contains thoughts and code on how to enhance GNNs Performance on Money
 
 
 # 1. Introduction
-In this project I am investigating **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Geometry** and **Graph Neural Networks**.
-Initially Inspired by the big issue of Value-Added-Tax Fraud, where in 2021 alone approx. 15 billion euros have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
+In this project I have investigated **Graph Structure-based Fraud Detection** in Financial Transaction Networks with the help of **Geometry** and **Graph Neural Networks**.
+Initially inspired by the big issue of *Value-Added-Tax Fraud*, where in 2021 alone approx. 15 billion euros have been stolen by criminals applying Value-Added-Tax Fraud-techniques in the EU according to [*Ott (2024)*](https://epub.jku.at/obvulihs/download/pdf/10500928).
 Due to lack of publicly available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach in combination with GNNs, it might still be useful for VAT Fraud as well.
 
 
@@ -78,11 +78,11 @@ and includes the following columns:
 
 A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
-# Implementation
-The core concept here is a neuro-symbolic approach, combining symbolic AI (logics / Rule-based approaches) and graph neural networks.
+# 3. Implementation
+The core in this project is a neuro-symbolic DL approach, combining symbolic AI (logics / Rule-based approaches) and graph neural networks.
 My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
 
-## 1. Setup
+## 1. Setup / Data Preparation
 I used a dockerized Neo4j database to store the previously mentioned dataset as property graph, for further analysis.
 The thereby created Ontology/Property Map can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
 
@@ -103,17 +103,18 @@ CREATE (fromAccount)-[:TRANSFERRED_TO {
 ```
 
 
-For information about the thereby created graph, you can run `src/stats/Neo4jStatisticsReport.py` to obtain a data report.
+For information about the thereby created graph, on might find something useful in `src/stats/Neo4jStatisticsReport.py`.
 
 
 ## 2. Geometry-based Preprocessing
 For this part, I utilized geometric models to preselect the networks on which the Graph (Neural) Nets are trained and tested.
 
-I expect this to increase the efficiency, as I hope to increase the quality of the GNNs Training data by filtering out irrelevant sub-graphs.
+I expect this to increase the efficiency and performance in correctly classifying Money Laundry Transactions (measured by the *F1 Score* , as I hoped to increase the quality of the GNNs Training data by filtering out obviously irrelevant sub-graphs).
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
-To be precise, I'll orient on the work of [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
+In order to do so, I've borrowed some thoughts from [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
 
 In this paper, the authors documented the following geometric elements: 
+
 - A **path** is a finite sequence of distinct edges joining a sequence of distinct vertices.
 
 - A **circuit** is a non-empty path in which the first and last vertices are repeated.
@@ -123,7 +124,7 @@ In this paper, the authors documented the following geometric elements:
 - A **clique** is a set of vertices for which the corresponding subgraph is a complete graph. A maximal clique is a clique that is not properly contained in a larger one. A clique with k vertices will be called a k-clique (although there are other notions with the same name in the literature)
 
 
-In order to identify (sub)graphs worth preselecting, I stick to the general definition of *Money Laundering* by the **Financial Action Task Force (FATF)** that defines it as *the process by
+In order to identify (sub)graphs worth preselecting, I stuck to the general definition of *Money Laundering* by the **Financial Action Task Force (FATF)** that defines it as *the process by
 which money generated through criminal activity appears to have come from a legitimate source.*
 So based on the definition above, some characteristic behaviors of money laundry can, and have been derived by the **FATF** and **UNODC**:
 
@@ -139,7 +140,7 @@ So based on the definition above, some characteristic behaviors of money laundry
 - **Rule 5.** After a process of money laundering interactions is initiated, it is to be expected that at some point (at least part of) the involved money returns to the money launderer agent completing a cycle.
 
 
-This then translates to the following geometric patterns: 
+Which then translates to the following geometric patterns: 
 
 - **Rule 1.** Look for paths for which a proportionally important/central part of their nodes are not as highly connected as the rest.
 
@@ -191,10 +192,10 @@ RETURN start,
        end,
        [rel IN relationships(path) | properties(rel)] AS all_relationship_attributes
 ```
-All of the above eventually yields a reduced graph that can be used for the GNN Training and Testing.
+All of the above combined eventually yielded a reduced graph that can be used for the GNN Training and Testing.
 
 ## 3. Graph Neural Networks
-For comprehensive Analysis, multiple NNs have been implemented and tested. More specifically, the following: 
+For comprehensive Analysis, multiple GNNs have been implemented and tested. More specifically, the following: 
 - GATe (Graph Attention Network with edge features) / GAT
 - GINe (Graph Isomorphism Network with edge features)
 - PNA (Principal Neighbourhood Aggregation)
@@ -225,6 +226,9 @@ GINe is a variant of the Graph Isomorphism Network (GIN) that also takes edge fe
 
 This model has been particularly effective in chemical and biological applications where bond types and other edge properties are significant.
 
+
+
+
 ### PNA (Principal Neighbourhood Aggregation)
 
 PNA is a GNN architecture designed to be more adaptable to **diverse graph structures**. Key features include:
@@ -246,9 +250,9 @@ RGCN is an extension of Graph Convolutional Networks (GCN) designed to handle mu
 RGCN has been successfully applied in various domains, including **knowledge base completion, entity classification, and link prediction in heterogeneous networks**.
 
 
-## 4. Putting everything together: 
+## 4. Putting everything together & Evaluating: 
 The combined approach of geometry-based preprocessing (GBPre) and GNNs can be found in `src/main.py`
-In order to evaluate weather the GBPre is actually beneficial, I chose to use the `f1` Score as  defined as: 
+In order to evaluate weather the GBPre is actually beneficial, I chose to use the *F1* Score as  defined as: 
 
 $$\text{Precision} = \frac{TP}{TP + FP}$$
 
@@ -261,23 +265,74 @@ $$\text{Recall} = \frac{TP}{TP + FN}$$
 $$F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
 
 
+
+### Goal: 
+While the absolut *F1 Score* is interesting, I want to investigate the relative difference between the models with and without GBPre. I target to achieve higher *F1* Scores with the GBPre models.
+Nonetheless, an *F1 Score* below 0.5 would be bad, as it would indicate a worse performance than flipping a coin for choosing weather a transaction is money laundering or not.  
+
+
+### Evaluation
+In order to be able to compare the different models with and without the GBPre I ran every model with and without GBPre via a `benchmark_testing.sh`.
+All important metrics have been stored and logged via **wand.ai**. 
+All models have additionally been stored locally under `src/models`. This was possible as the size of each model was very low.
+
+
+
+## Hyperparameter Tuning
+For the Hyperparameter Tuning, I tried the following different sets of Hyperparameter Configurations: 
+
+| Batch Size | Number of Epochs | Number of Neighbors         |
+|------------|------------------|-----------------------------|
+| 4096       | 50               | [50, 50]                    |
+| 4096       | 50               | [100, 100]                  |
+| 4096       | 50               | [150, 150]                  |
+| 4096       | 100              | [50, 50]                    |
+| 4096       | 100              | [100, 100]                  |
+| 4096       | 100              | [150, 150]                  |
+| 4096       | 150              | [50, 50]                    |
+| 4096       | 150              | [100, 100]                  |
+| **4096**   | **200**          | **[150, 150]** *(best one)* |
+| 8192       | 50               | [50, 50]                    |
+| 8192       | 50               | [100, 100]                  |
+| 8192       | 50               | [150, 150]                  |
+| 8192       | 100              | [100, 100]                  |
+| ...        | ...              | ...                         |
+
+## Results
+
+With the best performing Hyperparameter, the models yielded the following performance: 
+
+| Name           |Sweep|batch_size|dropout    |epochs|final_dropout|loss|lr         |model|n_gnn_layers|n_heads|n_hidden   |num_neighbors|w_ce1      |w_ce2      |best_test_f1|f1/test    |f1/train   |f1/validation|
+|----------------|-----|----------|-----------|------|-------------|----|-----------|-----|------------|-------|-----------|-------------|-----------|-----------|------------|-----------|-----------|-------------|
+| GBPre_PNA      |     |4096      |0.083404401|200   |0.288129797  |ce  |0.000611642|pna  |2           |       |20         |[100,100]    |1.000396767|7.077633468|0.418274112 |0.334883721|0.936030618|0.100558659  |
+| **GBPre_RCGN** |     |4096      |0.009834683|200   |0.105276906  |ce  |0.006213266|rgcn |2           |       |66.00315516|[100,100]    |1.000018288|9.23       |0.493943472 |0.50831793 |0.950727884|0.24009324   |
+| GBPre_GAT      |     |4096      |0.009      |200   |0.1          |ce  |0.006      |gat  |2           |4      |64         |[100,100]    |1          |6          |0.475916607 |0.467862481|0.786960514|0.258515284  |
+| GBPre_GIN      |     |4096      |0.009834683|200   |0.105276906  |ce  |0.006213266|gin  |2           |       |66.00315516|[100,100]    |1.000018288|6.275014431|0.242557883 |0.397350993|0.853795211|0.131445905  |
+| no_GBPre_PNA   |     |4096      |0.083404401|200   |0.288129797  |ce  |0.000611642|pna  |2           |       |20         |[100,100]    |1.000396767|7.077633468|0.454124904 |0.454192547|0.469369485|0.444698703  |
+| no_GBPre_RCGN  |     |4096      |0.009834683|200   |0.105276906  |ce  |0.006213266|rgcn |2           |       |66.00315516|[100,100]    |1.000018288|9.23       |0.451086957 |0.430457746|0.486665782|0.432363014  |
+| no_GBPre_GAT   |     |4096      |0.009      |200   |0.1          |ce  |0.006      |gat  |2           |4      |64         |[100,100]    |1          |6          |0.454371898 |0.455135548|0.467575487|0.450810403  |
+| no_GBPre_GIN   |     |4096      |0.009834683|200   |0.105276906  |ce  |0.006213266|gin  |2           |       |66.00315516|[100,100]    |1.000018288|6.275014431|0.455309396 |0.419461502|0.498770156|0.427923844  |
+
+## Conclusion: 
+
+Out of all models, **GBPre_RCGN** (RCGN with Geometry based Preprocessing) performed the best.
+
+
 ---
 
 # How to run Inference
-TBD 
+While the full inference service is planned to be finished for Assignment 3, a basic functionality is still provided via: 
+`python main.py --inference modelname`
 
-# How to train Models
+# How to train models
 1. Set up the DB Infrastructure via `docker-compose up -d`. 
    You should now see the database UI at `http://localhost:7687/`
-2. Install all needed packages via `poetry install`.
+2. Install all needed packages (in your .venv) via `pip install -r requirements.txt`.
 3. Download the data from [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data) and store it in the `/data` directory.
-4. Spawn a new venv shell via `poetry shell`.
-5. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
-   In order to be able to test the model training on small scale computational ressoruces (e.g. the local computer) flags for this have been introduced: 
-   ``python your_script.py --rows_to_insert 10000 --local_test``
-6. Run `src/main.py` with your desired configs to train models: 
-
-
+4. Specify the data path in `src/data_insertion_to_neo4j.py` and run it via `python data_insertion_to_neo4j.py`.
+   In order to be able to test the model training on small scale computational sorceress (e.g. the local computer) flags for this have been introduced: 
+   `python your_script.py --rows_to_insert 10000 --local_test`. This modifies the original dataset so a limited number of rows can be used for local test-training. 
+6. Run `src/main.py` with your desired configs to train models where the following arguments are available: 
 
 
 ### Required Arguments
@@ -286,7 +341,7 @@ TBD
 ### Optional Arguments
 
 #### Model Adaptations
-`--GBPre`: Enable Geometry based Preprocessing (default: True)
+`--GBPre`: Enable Geometry based Preprocessing (default: False)
 
 `--emlps`: Enable EMLP layers in GNN training
 
@@ -335,7 +390,7 @@ python main.py --model pna --finetune --unique_name pretrained_model_name```
 
 
 # How to test: 
-To execute the predefined test, run the following command in the project directory: 
+To execute the predefined (unit)test, run the following command in the project directory: 
 ```PYTHONPATH=./src pytest tests/```
 
 

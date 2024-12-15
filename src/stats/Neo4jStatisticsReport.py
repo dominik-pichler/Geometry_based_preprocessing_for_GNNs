@@ -58,10 +58,9 @@ class Neo4jStatisticsReport:
                 file.write(html_report)
 
 if __name__ == "__main__":
-    # Replace with your Neo4j connection details
-    uri = "bolt://localhost:7687"  # or your Neo4j URI
-    user = "neo4j"                   # your username
-    password = "your_password"       # your password
+    uri = "bolt://localhost:7687"
+    user = "neo4j"
+    password = "your_password"
 
     report_generator = Neo4jStatisticsReport(uri, user, password)
     report_generator.generate_report()

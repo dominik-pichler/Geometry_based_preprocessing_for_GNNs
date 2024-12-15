@@ -170,7 +170,8 @@ def train_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data
     #define a model config dictionary and wandb logging at the same time
     wandb.init(
         mode="disabled" if args.testing else "online",
-        project="Benchmark_Test_ADL_14_12", #replace this with your wandb project name if you want to use wandb logging
+        project="Benchmark_Test_ADL_15_12_2",
+
         name= args.unique_name,
 
         config={
