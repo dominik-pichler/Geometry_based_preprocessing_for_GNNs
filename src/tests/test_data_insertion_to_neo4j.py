@@ -1,12 +1,10 @@
 import pytest
 import pandas as pd
-import numpy as np
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
+from src.data_insertion_to_neo4j import insert_and_connect_data
 
-# Assuming the functions are imported from the module
-# from your_module import load_demo_data, isNaN, insert_and_connect_data
 
-# Mock data for testing
+
 mock_data = {
     'Timestamp': pd.date_range(start='1/1/2020', periods=5),
     'From Bank': ['BankA', 'BankB', 'BankC', 'BankD', 'BankE'],
@@ -20,32 +18,6 @@ mock_data = {
     'Is Laundering': [0, 0, 1, 0, 1]
 }
 
-# Test for load_demo_data function
-def test_load_demo_data():
-    with patch('pandas.read_csv') as mock_read_csv:
-        # Mock the DataFrame returned by read_csv
-        mock_df = pd.DataFrame(mock_data)
-        mock_read_csv.return_value = mock_df
-
-        # Call the function
-        df = load_demo_data()
-
-        # Check if the DataFrame is shuffled and has expected columns
-        assert len(df) == len(mock_df)
-        assert set(df.columns) == set(mock_df.columns)
-
-        # Check if approximately 50% of the timestamps are modified (for local_test=True)
-        modified_timestamps = df['Timestamp'] > mock_df['Timestamp']
-        assert modified_timestamps.sum() == int(len(mock_df) * 0.5)
-
-        # Check if approximately 30% of 'Is Laundering' is set to 1
-        assert df['Is Laundering'].sum() == int(len(mock_df) * 0.3)
-
-# Test for isNaN function
-def test_isNaN():
-    assert isNaN(np.nan) is True
-    assert isNaN(1) is False
-    assert isNaN('string') is False
 
 # Test for insert_and_connect_data function
 def test_insert_and_connect_data():

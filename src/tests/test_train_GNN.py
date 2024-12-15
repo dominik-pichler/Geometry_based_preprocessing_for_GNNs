@@ -62,3 +62,6 @@ def test_train_homo():
         )
     except Exception as e:
         pytest.fail(f"train_homo raised an exception: {e}")
+
+if __name__ == "__main__":
+    pytest.main()

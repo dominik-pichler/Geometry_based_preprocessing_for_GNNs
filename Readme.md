@@ -313,11 +313,31 @@ With the best performing Hyperparameter, the models yielded the following perfor
 | no_GBPre_GAT   |     |4096      |0.009      |200   |0.1          |ce  |0.006      |gat  |2           |4      |64         |[100,100]    |1          |6          |0.454371898 |0.455135548|0.467575487|0.450810403  |
 | no_GBPre_GIN   |     |4096      |0.009834683|200   |0.105276906  |ce  |0.006213266|gin  |2           |       |66.00315516|[100,100]    |1.000018288|6.275014431|0.455309396 |0.419461502|0.498770156|0.427923844  |
 
+
+#### F1 @ Testing
+![imgs/train_f1.png]()
+
+#### F1 @ Validation
+![imgs/val_f1.png]()
+
+#### F1 @ Testing
+![imgs/test_f1.png]()
+
+#### Best F1's: 
+![imgs/best_f1.png]()
+
+
 ## Conclusion: 
 
 Out of all models, **GBPre_RCGN** (RCGN with Geometry based Preprocessing) performed the best.
 Also, in all cases except for *GBPre_GIN* the models with GBPre outperformed the standard models in the *F1_Test*
 Nonetheless, I would advice to retest this with larger datasets. 
+
+
+
+
+
+
 
 ---
 
@@ -396,3 +416,36 @@ To execute the predefined (unit)test, run the following command in the project d
 
 
 
+
+
+---
+
+# Appendix (A):  Efforts so far
+## A.1 Dataset Collection and Preprocessing
+- **Research and Identify Suitable Datasets**: 9 hours
+- **Data Cleaning and Preprocessing**: 15 hours
+- **Feature Engineering**: 50 hours
+
+## A.2 Designing and Building the Graph Neural Network
+- **Literature Review on Graph Neural Networks**: 10 hours
+- **Network Architecture Design**: 15 hours
+- **Implementation of the Network**: 35 hours
+
+## A.3 Training and Fine-Tuning the Network
+- **Initial Model Training**: 10 hours
+- **Hyperparameter Tuning**: 10 hours
+- **Validation and Testing**: 15 hours
+
+## A.4 Building an Application to Present Results
+- **Design User Interface**: 15 hours
+- **Develop Application Backend**: 5 hours
+- **Integrate Model with Application**: 0 hours
+
+## A.5 Writing the Final Report
+- **Drafting the Report Structure**: 0 hours
+- **Writing and Editing Content**: 0 hours
+- **Creating Visualizations and Appendices**: 0 hours
+
+## A.6 Preparing the Presentation
+- **Design Presentation Slides**: 0 hours
+- **Rehearse Presentation Delivery**: 0 hours

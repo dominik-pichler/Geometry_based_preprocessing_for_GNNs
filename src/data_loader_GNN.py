@@ -4,13 +4,9 @@ import torch
 import logging
 import itertools
 from data_util import GraphData, HeteroData, z_norm, create_hetero_obj
-from neo4j import GraphDatabase
 from sklearn.preprocessing import LabelEncoder
-from ast import literal_eval
-from isodate import parse_duration
-import re
 
-from py2neo import Graph, Node, Relationship, NodeMatcher
+from py2neo import Graph
 def get_data(args):
 
     '''Loads the AML transaction data from Neo4j database.
