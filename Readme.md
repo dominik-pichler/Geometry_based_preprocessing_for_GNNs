@@ -315,16 +315,16 @@ With the best performing Hyperparameter, the models yielded the following perfor
 
 
 #### F1 @ Testing
-![imgs/train_f1.png]()
+![imgs/train_f1.png](imgs/train_f1.png)
 
 #### F1 @ Validation
-![imgs/val_f1.png]()
+![imgs/val_f1.png](imgs/val_f1.png)
 
 #### F1 @ Testing
-![imgs/test_f1.png]()
+![imgs/test_f1.png](imgs/test_f1.png)
 
 #### Best F1's: 
-![imgs/best_f1.png]()
+![imgs/best_f1.png](imgs/best_f1.png)
 
 
 ## Conclusion: 
