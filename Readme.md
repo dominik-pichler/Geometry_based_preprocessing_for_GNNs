@@ -24,10 +24,10 @@ This repo contains thoughts and code on how to enhance GNNs Performance on Money
 
 # 0. System Structure - Whats included
 1. Docker Container containing a graph database (Neo4j) for the KG/PG Storage and Logical Inference/Preprocessing
-2. An model training service (`src/main.py`)
+2. An model training service (`src/training.py`)
 3. An inference service consisting of: 
-   i.  Backend-Service (`TDB`)
-   ii. A web-based UI (`TDB`)
+   i.  Backend-Service (`src/main.py`)
+   ii. A web-based UI (`src/dash_brond_end.py`)
 
 
 # 1. Introduction
@@ -83,8 +83,8 @@ The core concept here is a neuro-symbolic approach, combining symbolic AI (logic
 My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
 
 ## 1. Setup
-I used a dockerized Neo4j database to store the in (2) mentioned dataset as graph, for further analysis.
-The therefore used Ontology can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
+I used a dockerized Neo4j database to store the previously mentioned dataset as property graph, for further analysis.
+The thereby created Ontology/Property Map can be found in `src/data_insertion_to_neo4j.py` or in this `Cypher Query`:
 
 ```cypher
 MERGE (fromBank:Bank {id: $From_Bank})
@@ -121,7 +121,6 @@ In this paper, the authors documented the following geometric elements:
 - A **cycle** or simple circuit is a circuit in which the only repeated vertices are the first and the last vertices. If there are no external edges connecting any two of its vertices it is called a chordless cycle or hole.
 
 - A **clique** is a set of vertices for which the corresponding subgraph is a complete graph. A maximal clique is a clique that is not properly contained in a larger one. A clique with k vertices will be called a k-clique (although there are other notions with the same name in the literature)
-
 
 
 In order to identify (sub)graphs worth preselecting, I stick to the general definition of *Money Laundering* by the **Financial Action Task Force (FATF)** that defines it as *the process by
@@ -249,12 +248,23 @@ RGCN has been successfully applied in various domains, including **knowledge bas
 
 ## 4. Putting everything together: 
 The combined approach of geometry-based preprocessing (GBPre) and GNNs can be found in `src/main.py`
+In order to evaluate weather the GBPre is actually beneficial, I chose to use the `f1` Score as  defined as: 
+
+$$\text{Precision} = \frac{TP}{TP + FP}$$
 
 
---- 
+
+$$\text{Recall} = \frac{TP}{TP + FN}$$
+
+
+
+$$F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+
+---
 
 # How to run Inference
-
+TBD 
 
 # How to train Models
 1. Set up the DB Infrastructure via `docker-compose up -d`. 
@@ -266,6 +276,8 @@ The combined approach of geometry-based preprocessing (GBPre) and GNNs can be fo
    In order to be able to test the model training on small scale computational ressoruces (e.g. the local computer) flags for this have been introduced: 
    ``python your_script.py --rows_to_insert 10000 --local_test``
 6. Run `src/main.py` with your desired configs to train models: 
+
+
 
 
 ### Required Arguments
@@ -320,3 +332,11 @@ python main.py --model gin --batch_size 4096 --n_epochs 200 --emlps --ports
 # Fine-tune a pre-trained PNA model
 python main.py --model pna --finetune --unique_name pretrained_model_name```
 ```
+
+
+# How to test: 
+To execute the predefined test, run the following command in the project directory: 
+```PYTHONPATH=./src pytest tests/```
+
+
+
