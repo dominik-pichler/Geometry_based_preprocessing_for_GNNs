@@ -36,7 +36,7 @@ Initially inspired by the big issue of *Value-Added-Tax Fraud*, where in 2021 al
 Due to lack of publicly available data, I had to switch to something similar: Money Laundry Patterns in Transaction Networks. As I chose a geometry based approach in combination with GNNs, it might still be useful for VAT Fraud as well.
 
 
-Therefore, I try to **bring my own method** to detect money laundering in the geometrical structures present in the IBM Transactions for Anti Money Laundering (AML) while orienting myself on the following three papers:
+Therefore, I tried to **bring my own method** to detect money laundering in the geometrical structures present in the IBM Transactions for Anti Money Laundering (AML) while orienting myself on the following three papers:
 - [The geometry of suspicious money laundering activities in financial networks](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi)
 - [Provably Powerful Graph Neural Networks for Directed Multigraph](https://arxiv.org/pdf/2306.11586)
 - [Smurf-based Anti-money Laundering in Time Evolving Transction Networks](https://www.researchgate.net/publication/354487674_Smurf-Based_Anti-money_Laundering_in_Time-Evolving_Transaction_Networks)
@@ -109,7 +109,7 @@ For information about the thereby created graph, on might find something useful 
 ## 2. Geometry-based Preprocessing
 For this part, I utilized geometric models to preselect the networks on which the Graph (Neural) Nets are trained and tested.
 
-I expect this to increase the efficiency and performance in correctly classifying Money Laundry Transactions (measured by the *F1 Score* , as I hoped to increase the quality of the GNNs Training data by filtering out obviously irrelevant sub-graphs).
+I expect this to increase the efficiency and performance in correctly classifying Money Laundry Transactions (measured by the *F1 Score*) , as I hoped to increase the quality of the GNNs Training data by filtering out obviously irrelevant sub-graphs).
 In addition, I expect this to yield an overall lower computational complexity of the GNN Training.
 In order to do so, I've borrowed some thoughts from [Granados et al. (2022)](https://perfilesycapacidades.javeriana.edu.co/en/publications/the-geometry-of-suspicious-money-laundering-activities-in-financi) 
 
@@ -195,13 +195,13 @@ RETURN start,
 All of the above combined eventually yielded a reduced graph that can be used for the GNN Training and Testing.
 
 ## 3. Graph Neural Networks
-For comprehensive Analysis, multiple GNNs have been implemented and tested. More specifically, the following: 
+For comprehensive Analysis, I have implemented and tested multiple GNNs. More specifically, the following: 
 - GATe (Graph Attention Network with edge features) / GAT
 - GINe (Graph Isomorphism Network with edge features)
 - PNA (Principal Neighbourhood Aggregation)
 - RGCN (Relational Graph Convolutional Network)
 
-The selection has been explicitly designed to incorporate the evolution of GNN Paradigms over Time. 
+The selection has been explicitly designed to incorporate the evolution of GNN Paradigms over time. 
 
 
 ### GATe (Graph Attention Network with edge features)
@@ -296,7 +296,6 @@ For the Hyperparameter Tuning, I tried the following different sets of Hyperpara
 | 8192       | 50               | [100, 100]                  |
 | 8192       | 50               | [150, 150]                  |
 | 8192       | 100              | [100, 100]                  |
-| ...        | ...              | ...                         |
 
 ## Results
 
@@ -330,7 +329,7 @@ With the best performing Hyperparameter, the models yielded the following perfor
 ## Conclusion: 
 
 Out of all models, **GBPre_RCGN** (RCGN with Geometry based Preprocessing) performed the best.
-Also, in all cases except for *GBPre_GIN* the models with GBPre outperformed the standard models in the *F1_Test*
+Also, in all cases except for **GBPre_GIN** the models with GBPre outperformed the standard models in the *F1_Test*.
 Nonetheless, I would advice to retest this with larger datasets. 
 
 
