@@ -316,7 +316,8 @@ With the best performing Hyperparameter, the models yielded the following perfor
 ## Conclusion: 
 
 Out of all models, **GBPre_RCGN** (RCGN with Geometry based Preprocessing) performed the best.
-
+Also, in all cases except for *GBPre_GIN* the models with GBPre outperformed the standard models in the *F1_Test*
+Nonetheless, I would advice to retest this with larger datasets. 
 
 ---
 
