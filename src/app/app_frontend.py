@@ -62,15 +62,15 @@ with st.sidebar:
     st.markdown("[Contact](#contact)", unsafe_allow_html=True)
 
 # Hero Section
-st.markdown("<h1 style='text-align:center;'>Anti-Money Laundering ML Inference Platform 💸</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align:center;'>Money Laundering Detector 💸</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<p style='text-align:center; font-size:18px;'>Fight (smurf-based) money laundering through modern neuro-symbolic AI.</p>",
+    "<p style='text-align:center; font-size:18px;'> Easily indentify money laundering in large networks of finanical transactions .</p>",
     unsafe_allow_html=True,
 )
 
 # Main Interface Section
-st.markdown("### Model Configuration")
-st.write("This application is based on modern graph neural networks ")
+st.markdown("### About")
+st.write("This application is based on modern graph neural networks and geometry-based proprocessing amining to efficiently detect smurf-based-money laundering in large scale transaction networks")
 
 
 st.markdown("#### Select Model Version")

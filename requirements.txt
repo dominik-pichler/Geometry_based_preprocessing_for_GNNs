@@ -56,8 +56,8 @@ protobuf==5.29.1
 psutil==6.1.0
 py2neo==2021.2.4
 pydantic==2.10.3
-pydantic_core==2.27.1
-pyg-lib==0.4.0+pt22
+#pydantic_core==2.27.1
+#pyg-lib==0.4.0+pt22
 Pygments==2.18.0
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
