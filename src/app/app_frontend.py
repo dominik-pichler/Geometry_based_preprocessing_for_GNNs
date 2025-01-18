@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import networkx as nx
-import plotly.graph_objects as go
 from pyvis.network import Network
 
 # Set page configuration
@@ -78,7 +77,7 @@ st.markdown("<br>",unsafe_allow_html=True)
 
 # Main Interface Section
 st.markdown("### About")
-st.markdown("This application aims at identifying money laundering transactions in arbitray large networks of banking transactions. "
+st.markdown("This application aims to identifying money laundering transactions in arbitray large networks of banking transactions. "
             "<br>It is based on modern graph neural networks and geometry-based proprocessing and in it's current form, includes trained models with the following architectures", unsafe_allow_html=True)
 
 st.markdown("<br>",unsafe_allow_html=True)
@@ -136,8 +135,6 @@ uploaded_file = st.file_uploader(
 st.markdown("<br>",unsafe_allow_html=True)
 st.markdown("<br>",unsafe_allow_html=True)
 
-st.markdown("### Results Dashboard")
-
 if st.button("Run Inference", key="run_inference"):
     if uploaded_file:
         with st.spinner("Running inference..."):
@@ -147,6 +144,11 @@ if st.button("Run Inference", key="run_inference"):
         st.write("Results will be displayed here.")
     else:
         st.error("Please upload a file to run inference.")
+
+st.markdown("<br>",unsafe_allow_html=True)
+
+
+st.markdown("### Results Table")
 
 
 data = {
@@ -260,7 +262,7 @@ with open(html_path, "w", encoding="utf-8") as f:
 
 
 # Embed the HTML file into Streamlit
-st.title("Interactive Transaction Network Graph")
+st.markdown("### Results - Visual Exploration")
 with open(html_path, "r", encoding="utf-8") as f:
     html_content = f.read()
 
@@ -269,13 +271,15 @@ st.components.v1.html(html_content, height=750)
 
 # Features Section
 st.markdown("<h2 id='features'>Features</h2>", unsafe_allow_html=True)
+st.markdown("<br>",unsafe_allow_html=True)
+
 col3, col4, col5 = st.columns(3)
 with col3:
     st.markdown(
         """
         <div class="card">
-        <h4>Enterprise Ready</h4>
-        <p>Built for scale with enterprise-grade security and compliance.</p>
+        <h4>Ready to scale</h4>
+        <p>Built for scale and enterprise-grade security / compliance.</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -284,8 +288,8 @@ with col4:
     st.markdown(
         """
         <div class="card">
-        <h4>Cloud Native</h4>
-        <p>Leveraging cloud infrastructure for optimal performance.</p>
+        <h4>Cloud & On-Premise Hosting</h4>
+        <p>Leveraging cloud and On-Premise infrastructure for optimal performance.</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -294,19 +298,14 @@ with col5:
     st.markdown(
         """
         <div class="card">
-        <h4>API First</h4>
-        <p>RESTful APIs for seamless integration with your stack.</p>
+        <h4>Countless Extensions</h4>
+        <p>New or custom trained models can be easily integrated.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
-# About Section
-st.markdown("<h2 id='about'>About Our Platform</h2>", unsafe_allow_html=True)
-st.write("""
-Our Enterprise ML Platform is designed to meet the demanding needs of modern businesses.
-With a focus on reliability, security, and performance, we provide a robust solution for enterprise-scale machine learning deployment.
-""")
+
 
 # Footer Section
 st.markdown("<hr>", unsafe_allow_html=True)

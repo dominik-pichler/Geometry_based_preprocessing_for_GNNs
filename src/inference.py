@@ -8,8 +8,30 @@ import logging
 import os
 import sys
 import time
+from models import GINe
 
 script_start = time.time()
+
+def infer_on_new_data(dataset:pd.DataFrame, model:torch.nn.Module,)
+    model = MyModel()
+
+    # Step 2: Load checkpoint
+    checkpoint = torch.load('path/to/checkpoint.pth')
+    model.load_state_dict(checkpoint['model_state_dict'])
+
+    model.eval()
+
+    # Step 4: Prepare input data (example: single image tensor)
+    input_data = torch.rand(1, 3, 224, 224)  # Example input shape for an image
+
+    # Step 5: Perform inference
+    with torch.no_grad():
+        predictions = model(input_data)
+
+    # Step 6: Process predictions (example for classification)
+    predicted_class = predictions.argmax(dim=1).item()
+    print(f"Predicted class: {predicted_class}")
+
 
 def infer_gnn(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, args, data_config):
     #set device
