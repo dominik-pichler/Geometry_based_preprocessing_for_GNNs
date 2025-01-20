@@ -12,19 +12,19 @@ from models import GINe
 
 script_start = time.time()
 
-def infer_on_new_data(dataset:pd.DataFrame, model:torch.nn.Module,)
-    model = MyModel()
+def infer_on_new_data(dataset:pd.DataFrame, model:torch.nn.Module,):
 
-    # Step 2: Load checkpoint
+    # Load checkpoint of trained model
     checkpoint = torch.load('path/to/checkpoint.pth')
     model.load_state_dict(checkpoint['model_state_dict'])
 
     model.eval()
 
-    # Step 4: Prepare input data (example: single image tensor)
+    # Prepare input data
     input_data = torch.rand(1, 3, 224, 224)  # Example input shape for an image
+    #TODO
 
-    # Step 5: Perform inference
+    # Perform inference
     with torch.no_grad():
         predictions = model(input_data)
 

@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 import networkx as nx
+import torch
 from pyvis.network import Network
-
+from app_backend import (check_and_validate_uploadData, infer_on_new_data)
+from data_loader_inference import preprocess_uploaded_data
 # Set page configuration
 st.set_page_config(
     page_title="Money Laundering Detector",
@@ -84,7 +86,6 @@ st.markdown("<br>",unsafe_allow_html=True)
 
 st.markdown("**GATe** (Graph Attention Network with edge features) / GAT <br>"
             "**GINe** (Graph Isomorphism Network with edge features) <br>"
-            "**PNA** (Principal Neighbourhood Aggregation)<br>"
             "**RGCN** (Relational Graph Convolutional Network)",unsafe_allow_html=True)
 
 st.markdown("<br>",unsafe_allow_html=True)
@@ -93,11 +94,14 @@ st.markdown("<br>",unsafe_allow_html=True)
 st.markdown("#### Select Model Version")
 model_version = st.selectbox(
     "Choose a model version:",
-    ["Graph Attention Network with edge features", "Graph Isomorphism Network with edge features", "Principal Neighbourhood Aggregation","Relational Graph Convolutional Network"],
+    ["Graph Attention Network with edge features", "Graph Isomorphism Network with edge features","Relational Graph Convolutional Network"],
     index=1,
     key="model_version",
     help="Select the version of the model you want to use."
 )
+
+
+
 st.markdown("<br>",unsafe_allow_html=True)
 
 
@@ -108,20 +112,21 @@ st.markdown("""
 Please consider that the application can only work with data in the following structure:
 """)
 
-# Display the DataFrame in an interactive table
-st.markdown("""
-| Timestamp       | From Bank | Account    | To Bank | Account    | Amount Received | Receiving Currency | Amount Paid | Payment Currency | Payment Format |
-|-----------------|-----------|------------|---------|------------|-----------------|--------------------|-------------|------------------|----------------|
-| 01.09.22 0:08   | 11        | 8000ECA90  | 11      | 8000ECA90  | 3195403         | US Dollar          | 3195403     | US Dollar        | Reinvestment   |
-| 01.09.22 0:21   | 3402      | 80021DAD0  | 3402    | 80021DAD0  | 1858.96         | US Dollar          | 1858.96     | US Dollar        | Reinvestment   |
-| 01.09.22 0:00   | 11        | 8000ECA90  | 1120    | 8006AA910  | 592571          | US Dollar          | 592571      | US Dollar        | Cheque         |
-| 01.09.22 0:16   | 3814      | 8006AD080  | 3814    | 8006AD080  | 12.32           | US Dollar          | 12.32       | US Dollar        | Reinvestment   |
-| 01.09.22 0:00   | 20        | 8006AD530  | 20      | 8006AD530  | 2941.56         | US Dollar          | 2941.56     | US Dollar        | Reinvestment   |
-| 01.09.22 0:24   | 12        | 8006ADD30  | 12      | 8006ADD30  | 6473.62         | US Dollar          | 6473.62     | US Dollar        | Reinvestment   |
-| 01.09.22 0:17   | 11        | 800059120  | 1217    | 8006AD4E0  | 60562           | US Dollar          | 60562       | US Dollar        | ACH            |
-""")
-st.markdown("<br>",unsafe_allow_html=True)
+# Data as a dictionary
+sample_data = {
+    "Timestamp": ["01.09.22 0:08", "01.09.22 0:21", "01.09.22 0:00", "01.09.22 0:16", "01.09.22 0:00", "01.09.22 0:24", "01.09.22 0:17"],
+    "From_Bank": [11, 3402, 11, 3814, 20, 12, 11],
+    "From_Account": ["8000ECA90", "80021DAD0", "8000ECA90", "8006AD080", "8006AD530", "8006ADD30", "800059120"],
+    "To_Bank": [11, 3402, 1120, 3814, 20,12,1217],
+    "To_Account": ["8000ECA90", "80021DAD0", "8006AA910", "8006AD080", "8006AD530","8006ADD30","8006AD4E0"],
+    "Amount_Received": [3195403,1858.96,592571,12.32,2941.56,6473.62,60562],
+    "Receiving_Currency": ["US Dollar"]*7,
+    "Amount_Paid":[3195403,1858.96,592571,12.32,2941.56,6473.62,60562],
+    "Payment_Currency":["US Dollar"]*7,
+    "Payment_Format":["Reinvestment","Reinvestment","Cheque","Reinvestment","Reinvestment","Reinvestment","ACH"]
+}
 
+st.dataframe(pd.DataFrame(sample_data))
 
 uploaded_file = st.file_uploader(
     "Drag and drop or browse to upload your file",
@@ -130,20 +135,50 @@ uploaded_file = st.file_uploader(
     help="Upload your dataset for inference.",
     label_visibility="collapsed"
 )
+valid_dataset_uploaded = False
+
+if uploaded_file is not None:
+    # Read the uploaded CSV file into a Pandas DataFrame
+    try:
+        df_uploaded_file = pd.read_csv(uploaded_file)
+        valid_flag, validation_error = check_and_validate_uploadData(df_uploaded_file)
+
+        if valid_flag:
+            st.write("File successfully uploaded and read into a DataFrame!")
+            st.dataframe(df_uploaded_file.head())
+            valid_dataset_uploaded = True
+        else:
+            st.write("File is not formated properly and hence not uploaded! Please make sure to name the columns accordingly to the requirements above.")
+            st.error(validation_error)
+    except Exception as e:
+        st.error(f"Error reading the file: {e}")
+else:
+    st.info("Please upload a CSV file.")
 
 
 st.markdown("<br>",unsafe_allow_html=True)
 st.markdown("<br>",unsafe_allow_html=True)
 
 if st.button("Run Inference", key="run_inference"):
-    if uploaded_file:
+    if valid_dataset_uploaded:
         with st.spinner("Running inference..."):
-            import time
-            time.sleep(2)  # Simulate processing time
+            node_tensor,edge_tensor, edge_features = preprocess_uploaded_data(df_uploaded_file)
+            st.info(f"Fun String {node_tensor}")
+            st.info(f"Fun String {edge_tensor}")
+            st.info(f"Fun String {edge_features}")
+
+
+            #out = model(batch.x, batch.edge_index, batch.edge_attr)
+
+            #pred = infer_on_new_data(node_tensor,edge_tensor, edge_features,model_version)
+            x = infer_on_new_data(node_tensor,edge_tensor, edge_features,model_version)
         st.success("Inference completed successfully!")
-        st.write("Results will be displayed here.")
+        st.write("Results will be displayed here:")
+        flattened_tensor = torch.flatten(x)
+        st.write(torch.flatten(flattened_tensor).tolist())
+
     else:
-        st.error("Please upload a file to run inference.")
+        st.error("Please upload a (valid) file to run inference.")
 
 st.markdown("<br>",unsafe_allow_html=True)
 
@@ -158,21 +193,21 @@ data = {
         '01.09.22 0:44', '01.09.22 0:45', '01.09.22 0:42', '01.09.22 0:38',
         '01.09.22 0:54'
     ],
-    'From Bank': [11, 3402, 11, 3814, 20, 12, 11, 11, 3402, 11, 3814, 20],
-    'Account From': [
+    'From_Bank': [11, 3402, 11, 3814, 20, 12, 11, 11, 3402, 11, 3814, 20],
+    'From_Account': [
         '8000ECA90', '80021DAD0', '8000ECA90', '8006AD080',
         '8006AD530', '8006ADD30', '800059120',
         '8000ECA90', '80021DAD0', '8000ECA90', '8006AD080',
         '8006AD530'
     ],
-    'To Bank': [11, 3402, 1120, 3814, 20, 12, 1217, 11, 3402, 1120, 3814, 20],
-    'Account To': [
+    'To_Bank': [11, 3402, 1120, 3814, 20, 12, 1217, 11, 3402, 1120, 3814, 20],
+    'To_Account': [
         '8000ECA90', '80021DAD0', '8006AA910', '8006AD080',
         '8006AD530', '8006ADD30', '8006AD4E0',
         '8006AA910', '80021DAD0', '8006AD530',
         '8006AD080', '8006ADD30'
     ],
-    'Amount Paid': [
+    'Amount_Paid': [
         3195403, 1858.96, 592571, 12.32,
         2941.56, 6473.62, 60562,
         1933.63, 2980.18, 1132.25,
@@ -190,9 +225,9 @@ G = nx.DiGraph()
 # Add edges with attributes for the graph
 for index, row in df.iterrows():
     G.add_edge(
-        row["Account From"],
-        row["Account To"],
-        amount=row["Amount Paid"],
+        row["From_Account"],
+        row["To_Account"],
+        amount=row["Amount_Paid"],
     )
 
 # Separate edges based on a condition (e.g., Amount Paid > threshold)

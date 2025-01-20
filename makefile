@@ -155,3 +155,30 @@ up:
 help:
 	@echo "Usage: make [target]\n"
 	@grep '^.PHONY: .* #' Makefile | sed 's/\.PHONY: \(.*\) # \(.*\)/\1	\2/' | expand -t20
+
+
+
+# Define tools
+LINTER = pylint
+FORMATTER = black
+SRC_DIR = src/  # Replace with your source code directory
+
+# Linting target
+lint: ## Run the linter (Pylint)
+	$(LINTER) $(SRC_DIR)
+
+# Formatting target
+format: ## Format the code using Black
+	$(FORMATTER) $(SRC_DIR)
+
+# Check formatting without modifying files
+format-check: ## Check if code is properly formatted
+	$(FORMATTER) --check $(SRC_DIR)
+
+# Combined linting and formatting check
+check: lint format-check ## Run both linting and formatting checks
+
+# Help target to list available commands
+help:
+	@echo "Available commands:"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-15s\033[0m %s\n", $$1, $$2}'

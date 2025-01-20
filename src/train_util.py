@@ -106,7 +106,7 @@ def get_loaders(tr_data, val_data, te_data, tr_inds, val_inds, te_inds, transfor
 
 @torch.no_grad()
 def evaluate_homo(loader, inds, model, data, device, args):
-    '''Evaluates the model performane for homogenous graph data.'''
+    '''Evaluates the model performance for homogenous graph data.'''
     preds = []
     ground_truths = []
     for batch in tqdm.tqdm(loader, disable=not args.tqdm):
@@ -134,7 +134,6 @@ def evaluate_homo(loader, inds, model, data, device, args):
 
             mask = torch.cat((mask, torch.ones(add_y.shape[0], dtype=torch.bool)))
 
-        #remove the unique edge id from the edge features, as it's no longer needed
         batch.edge_attr = batch.edge_attr[:, 1:]
         
         with torch.no_grad():
