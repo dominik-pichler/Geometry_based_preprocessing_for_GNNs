@@ -5,7 +5,7 @@
 **Matriculation Number:** 01530718
 
 **Course:** Applied Deep Learning 
-   
+
 **Date:** 20.01.2025  
 
 
@@ -25,11 +25,7 @@ Therefore, I tried to **bring my own method** to detect money laundering in the 
 
 - [Smurf-based Anti-money Laundering in Time Evolving Transction Networks](https://www.researchgate.net/publication/354487674_Smurf-Based_Anti-money_Laundering_in_Time-Evolving_Transaction_Networks)
 
-For this purpose, I am using the following dataset:
--  [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
-
-
-
+For this purpose, I am using the following dataset: [IBM - Syntetic Transaction Data for Anti-Money-Laundry Dataset](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data): 
 This dataset contains 180 Mio. transactions with a high and low Laundering-Transaction Share that  includes the following columns:
 
 | Column             | Description                                                                 |
@@ -46,11 +42,10 @@ This dataset contains 180 Mio. transactions with a high and low Laundering-Trans
 | Payment Format     | The method or format used for the payment (e.g., Reinvestment, Cheque, ACH).|
 | Is Laundering      | Indicates whether the transaction is suspected of money laundering (0 = No).|
 
-A more in-depth dataset analysis can be found [here](https://www.kaggle.com/datasets/ealtman2019/ibm-transactions-for-anti-money-laundering-aml/data:)
 
 # 2. Implementation / Solution
 The core in this project is a neuro-symbolic DL approach, combining symbolic AI (logics / Rule-based approaches) and graph neural networks.
-My own Method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
+My own method consists of combining geometry-based preprocessing with powerful Graph Neural Networks for directed Multi graphs.
 
 ## 2.1. Setup / Data Preparation
 I used a dockerized Neo4j database to store the previously mentioned dataset as property graph, for further analysis.
@@ -165,6 +160,8 @@ For the Hyperparameter Tuning, I tried the following different sets of Hyperpara
 | 8192       | 50               | [150, 150]                  |
 | 8192       | 100              | [100, 100]                  |
 
+\pagebreak
+
 ## Results
 
 With the best performing Hyperparameter, the models yielded the following performance: 
@@ -187,6 +184,9 @@ Out of all models, **GBPre_RCGN** (RCGN with Geometry based Preprocessing) perfo
 Also, in all cases except for **GBPre_GIN** the models with GBPre outperformed the standard models in the *F1_Test*.
 This highlights my initial assumption that geometry based preprocessing might acutally be a good enhancement for the deep learning approach (which proved very useful for this kind of problem).
 
+To answer the question of wether Deep Learning was an apppropriate tool for this kind of problem, I would conclude that it definitely is a very good, if not the best approach to my knowledge, as the complexity of those networks is way to big to be processed and analysed otherwise. 
+
+Regarding the time-estimates, I was pretty accurate, except for the preprocessing which tool longer than expected due to my underestimation of the complexity. What I also underestimated was the amout of RAM needed to preprocess the data in Neo4j. 
 
 ## Learnings
 
