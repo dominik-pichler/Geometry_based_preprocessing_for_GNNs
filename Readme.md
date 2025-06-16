@@ -414,37 +414,3 @@ To execute the predefined (unit)test, run the following command in the project d
 ```PYTHONPATH=./src pytest tests/```
 
 
-
-
-
----
-
-# Appendix (A):  Efforts so far
-## A.1 Dataset Collection and Preprocessing
-- **Research and Identify Suitable Datasets**: 9 hours
-- **Data Cleaning and Preprocessing**: 15 hours
-- **Feature Engineering**: 50 hours
-
-## A.2 Designing and Building the Graph Neural Network
-- **Literature Review on Graph Neural Networks**: 10 hours
-- **Network Architecture Design**: 15 hours
-- **Implementation of the Network**: 35 hours
-
-## A.3 Training and Fine-Tuning the Network
-- **Initial Model Training**: 10 hours
-- **Hyperparameter Tuning**: 10 hours
-- **Validation and Testing**: 15 hours
-
-## A.4 Building an Application to Present Results
-- **Design User Interface**: 15 hours
-- **Develop Application Backend**: 5 hours
-- **Integrate Model with Application**: 0 hours
-
-## A.5 Writing the Final Report
-- **Drafting the Report Structure**: 0 hours
-- **Writing and Editing Content**: 0 hours
-- **Creating Visualizations and Appendices**: 0 hours
-
-## A.6 Preparing the Presentation
-- **Design Presentation Slides**: 0 hours
-- **Rehearse Presentation Delivery**: 0 hours
